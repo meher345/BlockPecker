@@ -23,9 +23,9 @@
  */
 
 var HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraKey = "8068b04d2af44b91a5380056b7890202";
+//const infuraKey = "";
 const fs = require('fs');
-//var mnemonic = fs.readFileSync(".secret").toString().trim();
+var mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   /**
@@ -65,7 +65,7 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
     rinkeby: {
       provider: function() {
-        return new HDWalletProvider("actual tray galaxy cabin decade humble dash keep pole library expire basic", "https://rinkeby.infura.io/v3/1629bc2270234472b6870772b8e62518");
+        return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/1629bc2270234472b6870772b8e62518");
       },
       network_id: "*",       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
