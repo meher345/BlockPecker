@@ -2,10 +2,21 @@ import React, { Component } from "react";
 import TrademarkArtifact from "./contracts/Trademark.json";
 import getWeb3 from "./utils/getWeb3";
 
+//local imports
 import "./App.css";
 import CreateTrademark from "./components/Trademark/CreateTrademark";
+import Header from "./components/Header/Header";
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = {
+    storageValue: 0,
+    web3: null,
+    accounts: null,
+    contract: null,
+    networkId: null,
+    networkType: null,
+    isMetaMask: null,
+    balance: null
+  };
 
   componentDidMount = async () => {
     try {
@@ -17,6 +28,16 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
+      const networkType = await web3.eth.net.getNetworkType();
+      // const isMetaMask = (web3._currentProvider.host = "metamask"
+      //   ? true
+      //   : false);
+      const currentWallet = web3._currentProvider.host;
+      let balance =
+        accounts.length > 0
+          ? await web3.eth.getBalance(accounts[0])
+          : web3.utils.toWei("0");
+      balance = web3.utils.fromWei(balance, "ether");
       const deployedNetwork = TrademarkArtifact.networks[networkId];
       const instance = new web3.eth.Contract(
         TrademarkArtifact.abi,
@@ -25,7 +46,15 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({
+        web3,
+        accounts,
+        contract: instance,
+        networkId,
+        networkType,
+        currentWallet,
+        balance
+      });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -41,6 +70,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Header {...this.state} />
         <CreateTrademark
           contract={this.state.contract}
           accounts={this.state.accounts}

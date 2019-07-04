@@ -6,6 +6,10 @@ const MainWrapper = styled.div`
   flex-direction: column;
 `;
 
+// const RegisterTrademarkStyle = styled.div`
+// display: grid;
+// `;
+
 export default class CreateTrademark extends Component {
   state = {
     wordMark: null,
@@ -19,7 +23,7 @@ export default class CreateTrademark extends Component {
     const { accounts, contract } = this.props;
     console.log(accounts, "accounts");
     console.log(contract, "contract");
-
+    // console.log(contract)
     await contract.methods.createMark(mark, id).send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
