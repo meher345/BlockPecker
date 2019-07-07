@@ -2,3 +2,4 @@ node_modules
 .secret
 client/src/contracts
 .DS_Store
+package-lock.json
