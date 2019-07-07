@@ -112,6 +112,15 @@ const BalanceStyle = styled.div`
   }
 `;
 
+const AddressStyle = styled.div`
+  text-decoration: underline;
+`;
+
+const ALinkStyle = styled.a`
+  text-decoration: none;
+  color: inherit;
+`;
+
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -129,11 +138,13 @@ export default class Header extends Component {
     return (
       <HeaderStyle>
         <MenuStyle>
-          <LogoStyle>BLOCKPECKER</LogoStyle>
-          <StyledLink to="/create">
+          <ALinkStyle href="/tm">
+            <LogoStyle>BLOCKPECKER</LogoStyle>
+          </ALinkStyle>
+          <StyledLink to="/tm/create">
             <HeaderItemStyle>Register TM</HeaderItemStyle>
           </StyledLink>
-          <StyledLink to="/search">
+          <StyledLink to="/tm/search">
             <HeaderItemStyle>Search</HeaderItemStyle>
           </StyledLink>
           <HeaderItemStyle>My Trademarks</HeaderItemStyle>
@@ -147,10 +158,16 @@ export default class Header extends Component {
             <BalanceStyle>{shortBalance}</BalanceStyle>
           </NetworkInfoStyle>
           <HeaderAccountItemStyle
-            onClick={() => this.setState({ showFull: !this.state.showFull })}
+            onClick={() => {
+              this.setState({ showFull: !this.state.showFull });
+              // walletAddress.stringyfy().select();
+              // document.execCommand("copy");
+            }}
           >
             <GetAvatar {...this.props} />
-            {this.state.showFull ? walletAddress : shortWalletAddress}
+            <AddressStyle>
+              {this.state.showFull ? walletAddress : shortWalletAddress}
+            </AddressStyle>
           </HeaderAccountItemStyle>
         </AccountStyle>
       </HeaderStyle>

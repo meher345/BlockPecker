@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 const MainWrapper = styled.div`
   display: flex;
+  padding: 20px 40%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 // const RegisterTrademarkStyle = styled.div`
@@ -25,9 +26,28 @@ const InputStyle = styled.input`
   }
 `;
 
+const CommonTextStyle = styled.div`
+  padding: 0px 3px;
+`;
+
 const LineStyle = styled.div`
   display: inline-flex;
-  margin-bottom: 10px;
+  margin: 10px 0px;
+`;
+
+const Button = styled.div`
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: black;
+  background-color: #efefef;
+  padding: 5px 20px;
+  border-radius: 3px;
+  /* border: 1px solid #777; */
+  box-shadow: 4px 4px 9px -8px #777;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 9px -4px #777;
+  }
 `;
 
 export default class CreateTrademark extends Component {
@@ -53,29 +73,29 @@ export default class CreateTrademark extends Component {
         <h3> Register Trademark </h3>
 
         <LineStyle>
-          <div>Enter Word Mark</div>
+          <CommonTextStyle>Enter Word Mark: </CommonTextStyle>
           <InputStyle
             onChange={e => this.setState({ wordMark: e.target.value })}
           />
         </LineStyle>
         <LineStyle>
-          <div>Enter ID</div>
+          <CommonTextStyle>Enter ID: </CommonTextStyle>
           <InputStyle
             onChange={e => this.setState({ wordMarkID: e.target.value })}
           />
         </LineStyle>
 
-        <div>
-          <button
-            onClick={() =>
-              this.createMark(this.state.wordMark, this.state.wordMarkID)
-            }
-            size="small"
-          >
-            Submit
-          </button>
-        </div>
-        {this.state.markResponse && <p>Created</p>}
+        <Button
+          onClick={() =>
+            this.createMark(this.state.wordMark, this.state.wordMarkID)
+          }
+        >
+          Submit
+        </Button>
+        <LineStyle>
+          <CommonTextStyle>Response: </CommonTextStyle>
+          {this.state.markResponse && <p>Created</p>}
+        </LineStyle>
       </MainWrapper>
     );
   }
