@@ -4,11 +4,31 @@ import styled from "styled-components";
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 // const RegisterTrademarkStyle = styled.div`
 // display: grid;
 // `;
+
+const InputStyle = styled.input`
+  background-color: white;
+  border: 1px solid #777;
+  border-radius: 3px;
+  /* box-shadow: 0px 4px 2px -4px #777; */
+  overflow: visible;
+  padding: 0 0 0 3px;
+  height: 20px;
+  &:focus {
+    outline-color: #333854;
+    /* outline-style: none; */
+  }
+`;
+
+const LineStyle = styled.div`
+  display: inline-flex;
+  margin-bottom: 10px;
+`;
 
 export default class CreateTrademark extends Component {
   state = {
@@ -27,29 +47,23 @@ export default class CreateTrademark extends Component {
     await contract.methods.createMark(mark, id).send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
-
-  getMark = async id => {
-    const { contract } = this.props;
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.lookUptokenIdToMarkInfo(id).call();
-    // Update state with the result.
-    this.setState({ markResponseText: response });
-  };
   render() {
     return (
       <MainWrapper>
         <h3> Register Trademark </h3>
 
-        <div>
+        <LineStyle>
           <div>Enter Word Mark</div>
-          <input onChange={e => this.setState({ wordMark: e.target.value })} />
-        </div>
-        <div>
+          <InputStyle
+            onChange={e => this.setState({ wordMark: e.target.value })}
+          />
+        </LineStyle>
+        <LineStyle>
           <div>Enter ID</div>
-          <input
+          <InputStyle
             onChange={e => this.setState({ wordMarkID: e.target.value })}
           />
-        </div>
+        </LineStyle>
 
         <div>
           <button
@@ -62,26 +76,6 @@ export default class CreateTrademark extends Component {
           </button>
         </div>
         {this.state.markResponse && <p>Created</p>}
-
-        <p>------------------</p>
-        <h3>Get Mark by ID </h3>
-
-        <div>
-          <div>Enter ID</div>
-          <input
-            onChange={e => this.setState({ wordMarkIDget: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <button
-            onClick={() => this.getMark(this.state.wordMarkIDget)}
-            size="small"
-          >
-            Submit
-          </button>
-        </div>
-        {this.state.markResponseText && <p>{this.state.markResponseText}</p>}
       </MainWrapper>
     );
   }

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import TrademarkArtifact from "./contracts/Trademark.json";
 import getWeb3 from "./utils/getWeb3";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 //local imports
 import "./App.css";
 import CreateTrademark from "./components/Trademark/CreateTrademark";
 import Header from "./components/Header/Header";
+import LoaderComponent from "./components/LoaderComponent.js";
+import SearchTrademark from "./components/Trademark/SearchTrademark.js";
 class App extends Component {
   state = {
     storageValue: 0,
@@ -66,15 +69,35 @@ class App extends Component {
 
   render() {
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      return <LoaderComponent />;
     }
     return (
       <div className="App">
-        <Header {...this.state} />
-        <CreateTrademark
+        <Router>
+          <Header {...this.state} />
+          {/* <Route exact path="/" component={CreateTrademark} /> */}
+          <Route
+            path="/create"
+            render={() => (
+              <CreateTrademark
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+              />
+            )}
+          />
+          <Route
+            path="/search"
+            render={() => <SearchTrademark contract={this.state.contract} />}
+          />
+          {/* <CreateTrademark
           contract={this.state.contract}
           accounts={this.state.accounts}
         />
+        <SearchTrademark
+          contract={this.state.contract}
+          accounts={this.state.accounts}
+        /> */}
+        </Router>
       </div>
     );
   }
