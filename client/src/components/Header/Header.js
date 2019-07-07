@@ -8,8 +8,8 @@ const HeaderStyle = styled.div`
   display: flex;
   padding: 0px 200px;
   justify-content: space-between;
-  background-color: #333854;
-  color: #efefef;
+  background-color: #BEF781;
+  color: #0A1B2A;
   /* width: 60%; */
   height: 60px;
   align-items: center;

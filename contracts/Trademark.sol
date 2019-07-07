@@ -9,20 +9,37 @@ contract Trademark is ERC721 {
     // Mark data
     struct Mark {
         string name;
+        string desc;
+        string markClass;
+        string markType;
     }
+
+    uint256[] public allTokens;
+    mapping (address => uint256[]) internal ownedTokens;
+    mapping (address => uint256) internal ownedTokensCount;
+
 
     // Implement Task 1 Add a name and symbol properties
     // name: Is a short name to your token
     // symbol: Is a short string like 'USD' -> 'American Dollar'
     string public constant name = "Trademark Token Registry";
     string public constant symbol = "TMT";
+    uint256 public tokenCount;
+
     // mapping the Mark with the Owner Address
     mapping(uint256 => Mark) public tokenIdToMarkInfo;
     // mapping the TokenId and price
     mapping(uint256 => uint256) public marksForSale;
     // Create Mark using the Struct
-    function createMark(string memory _name, uint256 _tokenId) public { // Passing the name and tokenId as a parameters
-        Mark memory newMark = Mark(_name); // Mark is an struct so we are creating a new Mark
+    mapping(bytes32 => bool) public markHashMap;
+
+    function createMark(string memory _name, string memory _desc, string memory _markClass, string memory _markType) public {
+         // Passing the  as a parameters
+        tokenCount++;
+        uint256 _tokenId = tokenCount;
+        allTokens.push(_tokenId);
+
+        Mark memory newMark = Mark(_name, _desc, _markClass, _markType); // Mark is an struct so we are creating a new Mark
         tokenIdToMarkInfo[_tokenId] = newMark; // Creating in memory the Mark -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the Mark with _tokenId to the sender address (ownership)
     }
