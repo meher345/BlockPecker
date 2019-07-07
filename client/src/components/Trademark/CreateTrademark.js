@@ -3,12 +3,52 @@ import styled from "styled-components";
 
 const MainWrapper = styled.div`
   display: flex;
+  padding: 20px 40%;
   flex-direction: column;
+  align-items: flex-start;
 `;
 
 // const RegisterTrademarkStyle = styled.div`
 // display: grid;
 // `;
+
+const InputStyle = styled.input`
+  background-color: white;
+  border: 1px solid #777;
+  border-radius: 3px;
+  /* box-shadow: 0px 4px 2px -4px #777; */
+  overflow: visible;
+  padding: 0 0 0 3px;
+  height: 20px;
+  &:focus {
+    outline-color: #333854;
+    /* outline-style: none; */
+  }
+`;
+
+const CommonTextStyle = styled.div`
+  padding: 0px 3px;
+`;
+
+const LineStyle = styled.div`
+  display: inline-flex;
+  margin: 10px 0px;
+`;
+
+const Button = styled.div`
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: black;
+  background-color: #efefef;
+  padding: 5px 20px;
+  border-radius: 3px;
+  /* border: 1px solid #777; */
+  box-shadow: 4px 4px 9px -8px #777;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 9px -4px #777;
+  }
+`;
 
 export default class CreateTrademark extends Component {
   state = {
@@ -27,61 +67,35 @@ export default class CreateTrademark extends Component {
     await contract.methods.createMark(mark, id).send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
-
-  getMark = async id => {
-    const { contract } = this.props;
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.lookUptokenIdToMarkInfo(id).call();
-    // Update state with the result.
-    this.setState({ markResponseText: response });
-  };
   render() {
     return (
       <MainWrapper>
         <h3> Register Trademark </h3>
 
-        <div>
-          <div>Enter Word Mark</div>
-          <input onChange={e => this.setState({ wordMark: e.target.value })} />
-        </div>
-        <div>
-          <div>Enter ID</div>
-          <input
+        <LineStyle>
+          <CommonTextStyle>Enter Word Mark: </CommonTextStyle>
+          <InputStyle
+            onChange={e => this.setState({ wordMark: e.target.value })}
+          />
+        </LineStyle>
+        <LineStyle>
+          <CommonTextStyle>Enter ID: </CommonTextStyle>
+          <InputStyle
             onChange={e => this.setState({ wordMarkID: e.target.value })}
           />
-        </div>
+        </LineStyle>
 
-        <div>
-          <button
-            onClick={() =>
-              this.createMark(this.state.wordMark, this.state.wordMarkID)
-            }
-            size="small"
-          >
-            Submit
-          </button>
-        </div>
-        {this.state.markResponse && <p>Created</p>}
-
-        <p>------------------</p>
-        <h3>Get Mark by ID </h3>
-
-        <div>
-          <div>Enter ID</div>
-          <input
-            onChange={e => this.setState({ wordMarkIDget: e.target.value })}
-          />
-        </div>
-
-        <div>
-          <button
-            onClick={() => this.getMark(this.state.wordMarkIDget)}
-            size="small"
-          >
-            Submit
-          </button>
-        </div>
-        {this.state.markResponseText && <p>{this.state.markResponseText}</p>}
+        <Button
+          onClick={() =>
+            this.createMark(this.state.wordMark, this.state.wordMarkID)
+          }
+        >
+          Submit
+        </Button>
+        <LineStyle>
+          <CommonTextStyle>Response: </CommonTextStyle>
+          {this.state.markResponse && <p>Created</p>}
+        </LineStyle>
       </MainWrapper>
     );
   }

@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rimble/connection-banner": "^1.2.1",
     "react": "^16.8.6",
+    "react-content-loader": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "rimble-ui": "^0.9.4",
     "styled-components": "^4.3.2",
     "web3": "^1.0.0-beta.37"
   },
