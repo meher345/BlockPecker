@@ -37,6 +37,9 @@ contract Trademark is ERC721 {
         tokenCount++;
         uint256 _tokenId = tokenCount;
         allTokens.push(_tokenId);
+        ownedTokensCount[msg.sender] = allTokens.length;
+        ownedTokens[msg.sender] = allTokens;
+
 
         Mark memory newMark = Mark(_name, _desc, _markType); // Mark is an struct so we are creating a new Mark
         tokenIdToMarkInfo[_tokenId] = newMark; // Creating in memory the Mark -> tokenId mapping
@@ -73,9 +76,10 @@ contract Trademark is ERC721 {
         //1. You should return the Mark saved in tokenIdToMarkInfo mapping
         return tokenIdToMarkInfo[_tokenId].name;
     } 
-    //function getAllTradeMarks() public view returns (mapping) {
-        //return tokenIdToMarkInfo;
-    //}
+    function getAllTradeMarks(address _tokenOwner) public view returns(uint256[] memory) {
+        require(_tokenOwner == msg.sender,"not an owner");
+        return ownedTokens[_tokenOwner];
+    }
     // Implement Task 1 Exchange Marks function
     function exchangeMarks(uint256 _fromTokenId, uint256 _toTokenId) public {
         //1. Passing to Mark tokenId you will need to check if the owner of _tokenId1 or _tokenId2 is the sender
