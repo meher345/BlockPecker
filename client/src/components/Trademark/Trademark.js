@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Loader } from "rimble-ui";
 import styled from "styled-components";
 
@@ -97,10 +97,11 @@ class Trademark extends Component {
       <div className="Trademark">
         <Router>
           <Header {...this.state} />
-          {/* <Route exact path="/" component={CreateTrademark} /> */}
-          <Route exact path="/tm" render={() => <Dashboard />} />
+          <Route exact path="/dashboard" render={() => <Dashboard />} />
+
+          <Route path="/dashboard/view" render={() => <Dashboard />} />
           <Route
-            path="/tm/create"
+            path="/dashboard/create"
             render={() => (
               <CreateTrademark
                 contract={this.state.contract}
@@ -109,17 +110,9 @@ class Trademark extends Component {
             )}
           />
           <Route
-            path="/tm/search"
+            path="/dashboard/search"
             render={() => <SearchTrademark contract={this.state.contract} />}
           />
-          {/* <CreateTrademark
-          contract={this.state.contract}
-          accounts={this.state.accounts}
-        />
-        <SearchTrademark
-          contract={this.state.contract}
-          accounts={this.state.accounts}
-        /> */}
         </Router>
       </div>
     );

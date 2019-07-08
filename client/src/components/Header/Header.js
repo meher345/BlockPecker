@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //local imports
 import GetAvatar from "./GetAvatar";
@@ -21,15 +21,14 @@ const HeaderStyle = styled.div`
   display: flex;
   padding: 0px 100px;
   justify-content: space-between;
-  background-color: #BEF781;
-  color: #0A1B2A;
-  /* width: 60%; */
+  background-color: #bef781;
+  color: #0a1b2a;
   height: 60px;
   align-items: center;
   box-shadow: 0px 8px 4px -8px #777;
 
   &::selection {
-    color: #efefef;
+    color: inherit;
   }
 `;
 
@@ -43,9 +42,6 @@ const MenuStyle = styled.div`
 const AccountStyle = styled.div`
   display: flex;
   justify-content: space-between;
-  /* grid-template-columns: 1fr 3fr;
-  grid-auto-flow: column; */
-  /* margin-right: 0px; */
 `;
 
 const LogoStyle = styled.p`
@@ -138,16 +134,18 @@ export default class Header extends Component {
     return (
       <HeaderStyle>
         <MenuStyle>
-          <ALinkStyle href="/tm">
+          <ALinkStyle href="/dashboard">
             <LogoStyle>BLOCKPECKER</LogoStyle>
           </ALinkStyle>
-          <StyledLink to="/tm/create">
+          <StyledLink to="/dashboard/create">
             <HeaderItemStyle>Register TM</HeaderItemStyle>
           </StyledLink>
-          <StyledLink to="/tm/search">
+          <StyledLink to="/dashboard/search">
             <HeaderItemStyle>Search</HeaderItemStyle>
           </StyledLink>
-          <HeaderItemStyle>My Trademarks</HeaderItemStyle>
+          <StyledLink to="/dashboard/view">
+            <HeaderItemStyle>My Trademarks</HeaderItemStyle>
+          </StyledLink>
         </MenuStyle>
         <AccountStyle>
           <NetworkInfoStyle>
