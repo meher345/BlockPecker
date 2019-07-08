@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Input, Field, Button, Select, ToastMessage } from "rimble-ui";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -8,55 +9,14 @@ const MainWrapper = styled.div`
   align-items: flex-start;
 `;
 
-// const RegisterTrademarkStyle = styled.div`
-// display: grid;
-// `;
-
-const InputStyle = styled.input`
-  background-color: white;
-  border: 1px solid #777;
-  border-radius: 3px;
-  /* box-shadow: 0px 4px 2px -4px #777; */
-  overflow: visible;
-  padding: 0 0 0 3px;
-  height: 20px;
-  &:focus {
-    outline-color: #333854;
-    /* outline-style: none; */
-  }
-`;
-
-const CommonTextStyle = styled.div`
-  padding: 0px 3px;
-`;
-
-const LineStyle = styled.div`
-  display: inline-flex;
-  margin: 10px 0px;
-`;
-
-const Button = styled.div`
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: black;
-  background-color: #efefef;
-  padding: 5px 20px;
-  border-radius: 3px;
-  /* border: 1px solid #777; */
-  box-shadow: 4px 4px 9px -8px #777;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 4px 4px 9px -4px #777;
-  }
-`;
-
 export default class CreateTrademark extends Component {
   state = {
     wordMark: null,
     wordMarkID: null,
     wordMarkIDget: null,
     markResponseText: null,
-    markResponse: false
+    markResponse: false,
+    propertyType: "Trademark"
   };
 
   createMark = async (mark, id) => {
@@ -67,35 +27,53 @@ export default class CreateTrademark extends Component {
     await contract.methods.createMark(mark, id).send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
+
   render() {
     return (
       <MainWrapper>
-        <h3> Register Trademark </h3>
-
-        <LineStyle>
-          <CommonTextStyle>Enter Word Mark: </CommonTextStyle>
-          <InputStyle
-            onChange={e => this.setState({ wordMark: e.target.value })}
+        <Field label="Type: ">
+          <Select
+            required={true}
+            items={["Trademark", "Copyright"]}
+            onChange={e => this.setState({ propertyType: e.target.value })}
           />
-        </LineStyle>
-        <LineStyle>
-          <CommonTextStyle>Enter ID: </CommonTextStyle>
-          <InputStyle
-            onChange={e => this.setState({ wordMarkID: e.target.value })}
-          />
-        </LineStyle>
+        </Field>
+        {this.state.propertyType === "Trademark" ? (
+          <>
+            <h3> Register Trademark </h3>
 
-        <Button
-          onClick={() =>
-            this.createMark(this.state.wordMark, this.state.wordMarkID)
-          }
-        >
-          Submit
-        </Button>
-        <LineStyle>
-          <CommonTextStyle>Response: </CommonTextStyle>
-          {this.state.markResponse && <p>Created</p>}
-        </LineStyle>
+            <Field label="Enter Word Mark: ">
+              <Input
+                required={true}
+                onChange={e => this.setState({ wordMark: e.target.value })}
+              />
+            </Field>
+
+            <Field label="Enter ID: ">
+              <Input
+                required={true}
+                onChange={e => this.setState({ wordMarkID: e.target.value })}
+              />
+            </Field>
+
+            <Button
+              onClick={() => {
+                this.createMark(this.state.wordMark, this.state.wordMarkID);
+                this.state.markResponse &&
+                  window.toastProvider.addMessage("Created successfully...");
+              }}
+            >
+              Create
+            </Button>
+            <ToastMessage.Provider
+              ref={node => (window.toastProvider = node)}
+            />
+          </>
+        ) : (
+          <>
+            <h3>Register Copyright</h3>
+          </>
+        )}
       </MainWrapper>
     );
   }

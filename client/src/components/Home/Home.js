@@ -6,7 +6,7 @@ export default class Home extends Component {
     return (
       <div>
         <h2>Hello there...!</h2>
-        <a href="/tm">Get Started</a>
+        <a href="/dashboard">Get Started</a>
       </div>
     );
   }
