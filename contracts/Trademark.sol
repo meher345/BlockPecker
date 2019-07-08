@@ -10,7 +10,6 @@ contract Trademark is ERC721 {
     struct Mark {
         string name;
         string desc;
-        string markClass;
         string markType;
     }
 
@@ -33,13 +32,13 @@ contract Trademark is ERC721 {
     // Create Mark using the Struct
     mapping(bytes32 => bool) public markHashMap;
 
-    function createMark(string memory _name, string memory _desc, string memory _markClass, string memory _markType) public {
+    function createMark(string memory _name, string memory _desc, string memory _markType) public {
          // Passing the  as a parameters
         tokenCount++;
         uint256 _tokenId = tokenCount;
         allTokens.push(_tokenId);
 
-        Mark memory newMark = Mark(_name, _desc, _markClass, _markType); // Mark is an struct so we are creating a new Mark
+        Mark memory newMark = Mark(_name, _desc, _markType); // Mark is an struct so we are creating a new Mark
         tokenIdToMarkInfo[_tokenId] = newMark; // Creating in memory the Mark -> tokenId mapping
         _mint(msg.sender, _tokenId); // _mint assign the the Mark with _tokenId to the sender address (ownership)
     }
