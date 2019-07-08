@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Input, Field, Button, Select, ToastMessage } from "rimble-ui";
+import { Input, Field, Button, Select, ToastMessage, Flash } from "rimble-ui";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -11,20 +11,19 @@ const MainWrapper = styled.div`
 
 export default class CreateTrademark extends Component {
   state = {
-    wordMark: null,
-    wordMarkID: null,
-    wordMarkIDget: null,
-    markResponseText: null,
     markResponse: false,
-    propertyType: "Trademark"
+    propertyType: "Trademark",
+    markType: "Generic",
+    markName: "",
+    markDesc: ""
   };
 
-  createMark = async (mark, id) => {
+  createMark = async (markName, markDesc, markType) => {
     const { accounts, contract } = this.props;
-    console.log(accounts, "accounts");
-    console.log(contract, "contract");
-    // console.log(contract)
-    await contract.methods.createMark(mark, id).send({ from: accounts[0] });
+
+    await contract.methods
+      .createMark(markName, markDesc, markType)
+      .send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
 
@@ -41,30 +40,53 @@ export default class CreateTrademark extends Component {
         {this.state.propertyType === "Trademark" ? (
           <>
             <h3> Register Trademark </h3>
-
-            <Field label="Enter Word Mark: ">
-              <Input
+            <Field label="Trademark Type: ">
+              <Select
                 required={true}
-                onChange={e => this.setState({ wordMark: e.target.value })}
+                items={[
+                  "Generic",
+                  "Descriptive",
+                  "Suggestive",
+                  "Arbitrary/Fanciful"
+                ]}
+                onChange={e => this.setState({ markType: e.target.value })}
               />
             </Field>
-
-            <Field label="Enter ID: ">
+            <Field label="Enter Name: ">
               <Input
                 required={true}
-                onChange={e => this.setState({ wordMarkID: e.target.value })}
+                onChange={e => this.setState({ markName: e.target.value })}
+              />
+            </Field>
+            <Field label="Enter Description: ">
+              <Input
+                required={true}
+                onChange={e => this.setState({ markDesc: e.target.value })}
               />
             </Field>
 
             <Button
               onClick={() => {
-                this.createMark(this.state.wordMark, this.state.wordMarkID);
-                this.state.markResponse &&
-                  window.toastProvider.addMessage("Created successfully...");
+                this.createMark(
+                  this.state.markName,
+                  this.state.markDesc,
+                  this.state.markType
+                );
+
+                // window.toastProvider.addMessage("Created successfully...");
               }}
             >
               Create
             </Button>
+
+            {/* <Button onClick={() => console.log(this.state)}>Log State</Button> */}
+
+            {this.state.markResponse && (
+              <Flash my={3} variant="success">
+                Created successfully...
+              </Flash>
+            )}
+
             <ToastMessage.Provider
               ref={node => (window.toastProvider = node)}
             />
