@@ -15,7 +15,8 @@ export default class CreateTrademark extends Component {
     propertyType: "Trademark",
     markType: "Generic",
     markName: "",
-    markDesc: ""
+    markDesc: "",
+    myMarks: null
   };
 
   createMark = async (markName, markDesc, markType) => {
@@ -78,7 +79,6 @@ export default class CreateTrademark extends Component {
             >
               Create
             </Button>
-
             {/* <Button onClick={() => console.log(this.state)}>Log State</Button> */}
 
             {this.state.markResponse && (
