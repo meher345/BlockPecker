@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Field, Button, Select, ToastMessage, Flash } from "rimble-ui";
+import ipfs from "../../utils/ipfs";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -16,7 +17,9 @@ export default class CreateTrademark extends Component {
     markType: "Generic",
     markName: "",
     markDesc: "",
-    myMarks: null
+    myMarks: null,
+    buffer: "",
+    ipfsHash: ""
   };
 
   createMark = async (markName, markDesc, markType) => {
@@ -27,6 +30,34 @@ export default class CreateTrademark extends Component {
       .send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
+
+  captureFile = event => {
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    let reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
+  };
+
+  convertToBuffer = async reader => {
+    //file is converted to a buffer to prepare for uploading to IPFS
+    const buffer = await Buffer.from(reader.result);
+    //set this buffer -using es6 syntax
+    this.setState({ buffer });
+  };
+
+  uploadToIPFS = async event => {
+    event.preventDefault();
+
+    //save document to IPFS,return its hash#, and set hash# to state
+    //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
+    await ipfs.add(this.state.buffer, (err, ipfsHash) => {
+      console.log(err, ipfsHash);
+      //setState by setting ipfsHash to ipfsHash[0].hash
+      this.setState({ ipfsHash: ipfsHash[0].hash });
+    }); //await ipfs.add
+  }; //onSubmit
 
   render() {
     return (
@@ -66,6 +97,10 @@ export default class CreateTrademark extends Component {
               />
             </Field>
 
+            <Field label="Upload document to prove prior use: ">
+              <input type="file" onChange={this.captureFile} />
+            </Field>
+            <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
             <Button
               onClick={() => {
                 this.createMark(

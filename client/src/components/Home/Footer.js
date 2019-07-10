@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 //local imports
 import { phone } from "../helpers/mediaQueries";
-import { FacebookIcon, TwitterIcon, GithubIcon } from "../../static/Icons";
+// import { FacebookIcon, TwitterIcon, GithubIcon } from "../../static/Icons";
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -114,7 +114,7 @@ const Footer = () => {
       <FooterStyle>
         <FooterLeftStyle>
           <StyledLink href="/">
-            <LogoStyle>iprhub</LogoStyle>
+            {/* <LogoStyle>iprhub</LogoStyle> */}
           </StyledLink>
           <FooterItemsStyle>
             © Copyright 2019 iprhub. All rights reserved.
@@ -141,7 +141,7 @@ const Footer = () => {
             <FooterItemsStyle>Privacy Policy</FooterItemsStyle>
             <FooterItemsStyle>TnCs</FooterItemsStyle>
           </FooterRightItemsGroupStyle>
-          <FooterRightItemsGroupStyle>
+          {/* <FooterRightItemsGroupStyle>
             <FooterItemsStyle>Stay in Touch</FooterItemsStyle>
             <FooterItemsStyle>
               <FacebookIcon size="24" />
@@ -152,7 +152,7 @@ const Footer = () => {
             <FooterItemsStyle>
               <GithubIcon size="24" />
             </FooterItemsStyle>
-          </FooterRightItemsGroupStyle>
+          </FooterRightItemsGroupStyle> */}
         </FooterRightStyle>
       </FooterStyle>
     </FooterWrapper>

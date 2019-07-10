@@ -8,7 +8,7 @@ import { phone } from "../helpers/mediaQueries";
 import rem from "../helpers/rem";
 import Footer from "./Footer";
 import Header from "../Header/Header";
-import { PlusIcon } from "../../static/Icons";
+// import { PlusIcon } from "../../static/Icons";
 
 const LogoStyle = styled.p`
   font-weight: 800;
@@ -44,12 +44,9 @@ const MainLanding = styled.div`
   grid-template-columns: 2.5fr 3fr;
   grid-gap: 3.5vw; */
   /* flex-direction: row; */ /* align-items: center; */
-  ${phone(css`
+  /* ${phone(css`
     padding: 70px 24px;
-    /* flex-direction: column; */
-    /* grid-auto-flow: row;
-    grid-template-columns: 1fr; */
-  `)};
+  `)}; */
 `;
 
 const StrongText = styled.div`
@@ -264,7 +261,7 @@ const Home = () => {
         <SmallText>Register your Intellectual Property on Blockchain</SmallText>
 
         <OurPlatformStyle>
-          <LogoStyle>BLOCKPECKER</LogoStyle> <PlusIcon />
+          <LogoStyle>BLOCKPECKER</LogoStyle>
           <img
             alt=""
             width="160px"
