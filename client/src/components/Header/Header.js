@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { MetaMaskButton } from "rimble-ui";
 
 //local imports
 import GetAvatar from "./GetAvatar";
@@ -127,10 +128,11 @@ export default class Header extends Component {
 
   render() {
     const { accounts, networkType, currentWallet, balance } = this.props;
-    console.log(accounts[0], networkType, currentWallet, balance);
-    var walletAddress = accounts[0];
-    var shortWalletAddress = walletAddress.substring(0, 10) + "...";
-    const shortBalance = (Math.round(balance * 100) / 100).toFixed(3);
+    // console.log(accounts[0], networkType, currentWallet, balance);
+    var walletAddress = accounts && accounts[0];
+    var shortWalletAddress = accounts && walletAddress.substring(0, 10) + "...";
+    const shortBalance =
+      balance && (Math.round(balance * 100) / 100).toFixed(3);
     return (
       <HeaderStyle>
         <MenuStyle>
@@ -147,27 +149,33 @@ export default class Header extends Component {
             <HeaderItemStyle>My Trademarks</HeaderItemStyle>
           </StyledLink>
         </MenuStyle>
-        <AccountStyle>
-          <NetworkInfoStyle>
-            <HeaderAccountItemStyle>
-              <ConnectedDot />
-              {networkType === "private" ? "localhost" : networkType}
+        {!accounts ? (
+          <ALinkStyle href="/dashboard">
+            <MetaMaskButton>Login</MetaMaskButton>
+          </ALinkStyle>
+        ) : (
+          <AccountStyle>
+            <NetworkInfoStyle>
+              <HeaderAccountItemStyle>
+                <ConnectedDot />
+                {networkType === "private" ? "localhost" : networkType}
+              </HeaderAccountItemStyle>
+              <BalanceStyle>{shortBalance}</BalanceStyle>
+            </NetworkInfoStyle>
+            <HeaderAccountItemStyle
+              onClick={() => {
+                this.setState({ showFull: !this.state.showFull });
+                // walletAddress.stringyfy().select();
+                // document.execCommand("copy");
+              }}
+            >
+              <GetAvatar {...this.props} />
+              <AddressStyle>
+                {this.state.showFull ? walletAddress : shortWalletAddress}
+              </AddressStyle>
             </HeaderAccountItemStyle>
-            <BalanceStyle>{shortBalance}</BalanceStyle>
-          </NetworkInfoStyle>
-          <HeaderAccountItemStyle
-            onClick={() => {
-              this.setState({ showFull: !this.state.showFull });
-              // walletAddress.stringyfy().select();
-              // document.execCommand("copy");
-            }}
-          >
-            <GetAvatar {...this.props} />
-            <AddressStyle>
-              {this.state.showFull ? walletAddress : shortWalletAddress}
-            </AddressStyle>
-          </HeaderAccountItemStyle>
-        </AccountStyle>
+          </AccountStyle>
+        )}
       </HeaderStyle>
     );
   }
