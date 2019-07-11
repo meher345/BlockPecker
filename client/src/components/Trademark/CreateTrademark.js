@@ -24,11 +24,11 @@ export default class CreateTrademark extends Component {
     ipfsImg: ""
   };
 
-  createMark = async (markName, markDesc, markType) => {
+  createMark = async (markName, markDesc, markType, ipfsHash) => {
     const { accounts, contract } = this.props;
 
     await contract.methods
-      .createMark(markName, markDesc, markType)
+      .createMark(markName, markDesc, markType, ipfsHash)
       .send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
@@ -113,7 +113,6 @@ export default class CreateTrademark extends Component {
                 onChange={e => this.setState({ markDesc: e.target.value })}
               />
             </Field>
-
             <Field label="Upload document to prove prior use: ">
               <input type="file" onChange={this.captureFile} />
             </Field>
@@ -137,7 +136,8 @@ export default class CreateTrademark extends Component {
                 this.createMark(
                   this.state.markName,
                   this.state.markDesc,
-                  this.state.markType
+                  this.state.markType,
+                  this.state.ipfsHash
                 );
 
                 // window.toastProvider.addMessage("Created successfully...");

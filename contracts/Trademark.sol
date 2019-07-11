@@ -11,11 +11,13 @@ contract Trademark is ERC721 {
         string name;
         string desc;
         string markType;
+        string ipfsHash;
     }
 
+    Mark[] marks;
     uint256[] public allTokens;
     mapping (address => uint256[]) internal ownedTokens;
-    mapping (address => uint256) internal ownedTokensCount;
+    //mapping (address => uint256) internal ownedTokensCount;
 
 
     // Implement Task 1 Add a name and symbol properties
@@ -23,7 +25,6 @@ contract Trademark is ERC721 {
     // symbol: Is a short string like 'USD' -> 'American Dollar'
     string public constant name = "Trademark Token Registry";
     string public constant symbol = "TMT";
-    uint256 public tokenCount;
 
     // mapping the Mark with the Owner Address
     mapping(uint256 => Mark) public tokenIdToMarkInfo;
@@ -32,18 +33,33 @@ contract Trademark is ERC721 {
     // Create Mark using the Struct
     mapping(bytes32 => bool) public markHashMap;
 
-    function createMark(string memory _name, string memory _desc, string memory _markType) public {
-         // Passing the  as a parameters
-        tokenCount++;
-        uint256 _tokenId = tokenCount;
-        allTokens.push(_tokenId);
-        ownedTokensCount[msg.sender] = allTokens.length;
-        ownedTokens[msg.sender] = allTokens;
+    function createMark(string memory _name, string memory _desc, string memory _markType, string memory _ipfsHash) public {
+        // Mark is an struct so we are creating a new Mark
+        Mark memory newMark = Mark(_name, _desc, _markType, _ipfsHash);
+        // Adding the Mark to marks and generating an ID
+        uint _tokenId = marks.push(newMark) - 1;
+        // _mint the token
+        _mint(msg.sender, _tokenId);
+        // Adding the mark to ownedTokens to track the list of tokens owned by an address
+        ownedTokens[msg.sender].push(_tokenId);
+        // Mapping to track each token associated to each Mark
+        tokenIdToMarkInfo[_tokenId] = newMark;
+        // Emit event
+        //TODO
+    }
 
+    // Implement Task 1 lookUptokenIdToMarkInfo
+    function getMarkFromId (uint _tokenId) public view returns (string memory, string memory, string memory, string memory) {
+        //1. You should return the Mark saved in tokenIdToMarkInfo mapping
+        return (tokenIdToMarkInfo[_tokenId].name,
+        tokenIdToMarkInfo[_tokenId].desc,
+        tokenIdToMarkInfo[_tokenId].markType,
+        tokenIdToMarkInfo[_tokenId].ipfsHash);
+    }
 
-        Mark memory newMark = Mark(_name, _desc, _markType); // Mark is an struct so we are creating a new Mark
-        tokenIdToMarkInfo[_tokenId] = newMark; // Creating in memory the Mark -> tokenId mapping
-        _mint(msg.sender, _tokenId); // _mint assign the the Mark with _tokenId to the sender address (ownership)
+    function getOwnedMarks() public view returns(uint256[] memory) {
+        uint256[] memory tokenList = ownedTokens[msg.sender];
+        return tokenList;
     }
 
     // Putting an Mark for sale (Adding the Mark tokenid into the mapping MarksForSale, first verify that the sender is the owner)
@@ -71,16 +87,7 @@ contract Trademark is ERC721 {
             msg.sender.transfer(msg.value - markCost);
         }
     }
-    // Implement Task 1 lookUptokenIdToMarkInfo
-    function lookUptokenIdToMarkInfo (uint _tokenId) public view returns (string memory) {
-        //1. You should return the Mark saved in tokenIdToMarkInfo mapping
-        return tokenIdToMarkInfo[_tokenId].name;
-    } 
-    function getAllTradeMarks(address _tokenOwner) public view returns(uint256[] memory) {
-        require(_tokenOwner == msg.sender,"not an owner");
-        return ownedTokens[_tokenOwner];
-    }
-    // Implement Task 1 Exchange Marks function
+
     function exchangeMarks(uint256 _fromTokenId, uint256 _toTokenId) public {
         //1. Passing to Mark tokenId you will need to check if the owner of _tokenId1 or _tokenId2 is the sender
         address _from = ownerOf(_fromTokenId);
@@ -94,7 +101,6 @@ contract Trademark is ERC721 {
         transferFrom(_to, _from, _toTokenId);
     }
 
-    // Implement Task 1 Transfer Marks
     function transferAMark(address _to1, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
         require(ownerOf(_tokenId) == msg.sender, "");

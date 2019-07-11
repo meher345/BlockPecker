@@ -9,9 +9,8 @@ contract('Trademark', async (accs) => {
 });
 
 it('can Create a mark', async() => {
-    let tokenId = 1;
     let instance = await Trademark.deployed();
-    await instance.createMark('Awesome mark!', tokenId, {from: accounts[0]})
+    await instance.createMark('Awesome mark!', desc, {from: accounts[0]})
     assert.equal(await instance.tokenIdToMarkInfo.call(tokenId), 'Awesome mark!')
 });
 
