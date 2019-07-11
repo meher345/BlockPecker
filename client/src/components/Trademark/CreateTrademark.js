@@ -19,7 +19,8 @@ export default class CreateTrademark extends Component {
     markDesc: "",
     myMarks: null,
     buffer: "",
-    ipfsHash: ""
+    ipfsHash: "QmcuZQyTzivQUH4ZruyR7sMwAjC5yZnMbTqXtFBjS6aD49",
+    ipfsImg:""
   };
 
   createMark = async (markName, markDesc, markType) => {
@@ -58,6 +59,19 @@ export default class CreateTrademark extends Component {
       this.setState({ ipfsHash: ipfsHash[0].hash });
     }); //await ipfs.add
   }; //onSubmit
+
+  getFileFromIPFS = async hash => {
+    //save document to IPFS,return its hash#, and set hash# to state
+    //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
+    await ipfs.get(hash, (err, files) => {
+      files.forEach((file)=>{
+        console.log(file.path)
+        console.log("File content >> ",file.content)
+        this.setState({ipfsImg: file.content})
+      });
+    });
+  };
+
 
   render() {
     return (
@@ -101,6 +115,8 @@ export default class CreateTrademark extends Component {
               <input type="file" onChange={this.captureFile} />
             </Field>
             <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
+            <button onClick={() => this.getFileFromIPFS(this.state.ipfsHash)}>
+            get ipfs</button>
             <Button
               onClick={() => {
                 this.createMark(
