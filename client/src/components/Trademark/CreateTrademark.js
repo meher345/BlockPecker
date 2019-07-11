@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Field, Button, Select, ToastMessage, Flash } from "rimble-ui";
 import ipfs from "../../utils/ipfs";
+import rem from "../../components/helpers/rem";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ export default class CreateTrademark extends Component {
     myMarks: null,
     buffer: "",
     ipfsHash: "QmcuZQyTzivQUH4ZruyR7sMwAjC5yZnMbTqXtFBjS6aD49",
-    ipfsImg:""
+    ipfsImg: ""
   };
 
   createMark = async (markName, markDesc, markType) => {
@@ -64,14 +65,16 @@ export default class CreateTrademark extends Component {
     //save document to IPFS,return its hash#, and set hash# to state
     //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
     await ipfs.get(hash, (err, files) => {
-      files.forEach((file)=>{
-        console.log(file.path)
-        console.log("File content >> ",file.content)
-        this.setState({ipfsImg: file.content})
+      if (err) {
+        throw err;
+      }
+      files.forEach(file => {
+        console.log(file.path);
+        console.log("File content >> ", file.content);
+        this.setState({ ipfsImg: file.content.toString("base64") });
       });
     });
   };
-
 
   render() {
     return (
@@ -116,7 +119,19 @@ export default class CreateTrademark extends Component {
             </Field>
             <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
             <button onClick={() => this.getFileFromIPFS(this.state.ipfsHash)}>
-            get ipfs</button>
+              get ipfs
+            </button>
+
+            {this.state.ipfsImg ? (
+              <img
+                src={"data:image/png;base64," + this.state.ipfsImg}
+                height="200px"
+                width="200px"
+              />
+            ) : (
+              <p>Not Found</p>
+            )}
+
             <Button
               onClick={() => {
                 this.createMark(
