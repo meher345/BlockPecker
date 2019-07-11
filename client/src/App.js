@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //local imports
 
-import Trademark from "./components/Trademark/Trademark.js";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home.js";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         <Router>
           <Route exact path="/" component={Home} />
 
-          <Route path="/dashboard" render={() => <Trademark />} />
+          <Route path="/dashboard" render={() => <Dashboard />} />
         </Router>
       </div>
     );

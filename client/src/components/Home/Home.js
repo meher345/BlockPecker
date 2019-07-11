@@ -160,7 +160,7 @@ const CardContent = styled.p`
   font-weight: 300;
 `;
 
-const PrimaryButton = styled.div`
+const PrimaryButton = styled.a`
   background-color: #3fda97;
   background-image: none;
   border: 1px solid transparent;
@@ -238,19 +238,18 @@ const ALinkStyle = styled.a`
 `;
 
 const Home = () => {
+  
   return (
     <HomeWrapper>
       <Header />
       <MainLanding>
         <CenterWrapper>
-          <StrongText>Intellectual Property, Simplified.</StrongText>
+          <StrongText>Trademarks on the blockchain, simplified</StrongText>
           <SmallText>
-            blockpecker is an Intellectual Property Rights management platform
-            aimed at simplifying Intellectual Property applications,
-            prosecution, tracking and management for innovators, creators, right
-            holders and IPR Attorneys.
+            Blockpecker is a Trademark prior use registration platform for protecting marks. 
+            Minimal cost, Tamper proof and Time stamped. 
           </SmallText>
-          <PrimaryButton>Get Started</PrimaryButton>
+          <PrimaryButton href='/dashboard'> Get Started </PrimaryButton>
         </CenterWrapper>
 
         {/* <IllustrationsWrapper><HomeDesign /></IllustrationsWrapper> */}

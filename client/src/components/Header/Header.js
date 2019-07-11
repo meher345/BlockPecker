@@ -136,7 +136,7 @@ export default class Header extends Component {
     return (
       <HeaderStyle>
         <MenuStyle>
-          <ALinkStyle href="/dashboard">
+          <ALinkStyle href="/">
             <LogoStyle>BLOCKPECKER</LogoStyle>
           </ALinkStyle>
           <ALinkStyle href="/dashboard/create">
@@ -145,8 +145,8 @@ export default class Header extends Component {
           <ALinkStyle href="/dashboard/search">
             <HeaderItemStyle>Search</HeaderItemStyle>
           </ALinkStyle>
-          <ALinkStyle href="/dashboard/view">
-            <HeaderItemStyle>My Trademarks</HeaderItemStyle>
+          <ALinkStyle href="/dashboard">
+            <HeaderItemStyle>Dashboard</HeaderItemStyle>
           </ALinkStyle>
         </MenuStyle>
         {!accounts ? (
