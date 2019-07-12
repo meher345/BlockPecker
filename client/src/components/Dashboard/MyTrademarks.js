@@ -92,7 +92,9 @@ export default class MyTrademarks extends Component {
             ))}
           </Card.Group>
         )}
-        {/* <Button onClick={() => console.log(this.state)}>Log state</Button> */}
+        {/* <Button onClick={() => console.log(this.state, this.props)}>
+          Log state
+        </Button> */}
       </MainWrapper>
     );
   }

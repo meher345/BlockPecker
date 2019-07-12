@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Loader } from "rimble-ui";
 import styled from "styled-components";
+import { Button } from "semantic-ui-react";
 
 //local imports
 import TrademarkArtifact from "../../contracts/Trademark.json";
@@ -39,8 +40,19 @@ class Dashboard extends Component {
     return (
       <LoaderWrapper>
         <Loader size="80px" />
+
         <h3> Loading Web3, accounts and contract...</h3>
         <p> Unlock your metamask </p>
+      </LoaderWrapper>
+    );
+  }
+
+  renderWrongNetworkLoader() {
+    return (
+      <LoaderWrapper>
+        <Loader size="80px" />
+
+        <h5> You are on wrong network, please switch to Rinkeby...</h5>
       </LoaderWrapper>
     );
   }
@@ -99,50 +111,61 @@ class Dashboard extends Component {
     if (!this.state.accounts || !this.state.contract) {
       return this.renderLoader();
     }
-    return (
-      <div className="Trademark">
-        <Router>
-          <Header {...this.state} />
-          <Route
-            exact
-            path="/dashboard"
-            render={() => (
-              <MyTrademarks
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
 
-          <Route
-            path="/dashboard/create"
-            render={() => (
-              <CreateTrademark
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
+    if (
+      this.state.networkType === "rinkeby" ||
+      this.state.networkType === "private"
+    )
+      return (
+        <div className="Trademark">
+          <Router>
+            <Header {...this.state} />
+            {/* <Button onClick={() => console.log(this.state, this.props)}>
+              {" "}
+              Log{" "}
+            </Button> */}
 
-          <Route
-            path="/dashboard/search"
-            render={() => <SearchTrademark contract={this.state.contract} />}
-          />
+            <Route
+              exact
+              path="/dashboard"
+              render={() => (
+                <MyTrademarks
+                  contract={this.state.contract}
+                  accounts={this.state.accounts}
+                />
+              )}
+            />
 
-          <Route
-            exact
-            path="/dashboard/view/:id"
-            render={props => (
-              <ViewTM
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-                {...props}
-              />
-            )}
-          />
-        </Router>
-      </div>
-    );
+            <Route
+              path="/dashboard/create"
+              render={() => (
+                <CreateTrademark
+                  contract={this.state.contract}
+                  accounts={this.state.accounts}
+                />
+              )}
+            />
+
+            <Route
+              path="/dashboard/search"
+              render={() => <SearchTrademark contract={this.state.contract} />}
+            />
+
+            <Route
+              exact
+              path="/dashboard/view/:id"
+              render={props => (
+                <ViewTM
+                  contract={this.state.contract}
+                  accounts={this.state.accounts}
+                  {...props}
+                />
+              )}
+            />
+          </Router>
+        </div>
+      );
+    return this.renderWrongNetworkLoader();
   }
 }
 
