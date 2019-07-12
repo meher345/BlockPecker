@@ -95,14 +95,23 @@ class Dashboard extends Component {
     if (!this.state.web3) {
       return this.renderLoader();
     }
+    if (!this.state.accounts || !this.state.contract) {
+      return this.renderLoader();
+    }
     return (
       <div className="Trademark">
         <Router>
           <Header {...this.state} />
-          <Route exact path="/dashboard" render={() => <MyTrademarks
-            contract={this.state.contract}
-            accounts={this.state.accounts}
-          />} />
+          <Route
+            exact
+            path="/dashboard"
+            render={() => (
+              <MyTrademarks
+                contract={this.state.contract}
+                accounts={this.state.accounts}
+              />
+            )}
+          />
 
           <Route
             path="/dashboard/create"

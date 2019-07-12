@@ -53,20 +53,22 @@ export default class MyTrademarks extends Component {
   }
   async componentDidMount() {
     const { contract, accounts } = this.props;
-    const response = await contract.methods.getOwnedMarks().call({ from: accounts[0] })
-    const noOfTokens = response.length
-    if (noOfTokens > 0) {
-      response.map(async each => {
-        const tokenId = each.toNumber()
-        await contract.methods.getMarkFromId(tokenId).call()
-          .then(data =>
-            this.setState({
-              tokenList: [...this.state.tokenList, data],
-            })
-          )
-          .catch(e => alert(e))
-      })
-    }
+    
+      const response = await contract.methods.getOwnedMarks().call({ from: accounts[0] })
+      const noOfTokens = response.length
+      if (noOfTokens > 0) {
+        response.map(async each => {
+          const tokenId = each.toNumber()
+          await contract.methods.getMarkFromId(tokenId).call()
+            .then(data =>
+              this.setState({
+                tokenList: [...this.state.tokenList, data],
+              })
+            )
+            .catch(e => alert(e))
+        })
+      }
+    
   }
 
   render() {
