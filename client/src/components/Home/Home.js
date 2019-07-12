@@ -57,6 +57,7 @@ const StrongText = styled.div`
   margin: 0 auto;
   max-width: 750px;
   align-self: center;
+  line-height: ${rem(45)};
   ${phone(css`
     font-size: ${rem(35)};
     font-weight: 500;
@@ -162,10 +163,8 @@ const CardContent = styled.p`
 
 const PrimaryButton = styled.a`
   background-color: #3fda97;
-  background-image: none;
   border: 1px solid transparent;
   border-radius: 3px;
-  box-shadow: none;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -178,16 +177,8 @@ const PrimaryButton = styled.a`
   padding: 8px 16px;
   position: relative;
   text-align: center;
-  text-decoration: none;
-  touch-action: manipulation;
   transition-delay: 0s, 0s, 0s;
   transition-duration: 0.1s, 0.1s, 50ms;
-  transition-property: background-color, border-color, box-shadow;
-  transition-timing-function: ease-out, ease-out, ease-out;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  /* margin-top: -30px; */
   &:hover {
     background-color: #25c17e;
     outline: 0;
@@ -238,7 +229,6 @@ const ALinkStyle = styled.a`
 `;
 
 const Home = () => {
-  
   return (
     <HomeWrapper>
       <Header />
@@ -246,10 +236,10 @@ const Home = () => {
         <CenterWrapper>
           <StrongText>Trademarks on the blockchain, simplified</StrongText>
           <SmallText>
-            Blockpecker is a Trademark prior use registration platform for protecting marks. 
-            Minimal cost, Tamper proof and Time stamped. 
+            Blockpecker is a Trademark prior use registration platform for
+            protecting marks. Minimal cost, Tamper proof and Time stamped.
           </SmallText>
-          <PrimaryButton href='/dashboard'> Get Started </PrimaryButton>
+          <PrimaryButton href="/dashboard"> Get Started </PrimaryButton>
         </CenterWrapper>
 
         {/* <IllustrationsWrapper><HomeDesign /></IllustrationsWrapper> */}
