@@ -139,15 +139,18 @@ export default class Header extends Component {
           <ALinkStyle href="/">
             <LogoStyle>BLOCKPECKER</LogoStyle>
           </ALinkStyle>
+
+          <ALinkStyle href="/dashboard">
+            <HeaderItemStyle>Dashboard</HeaderItemStyle>
+          </ALinkStyle>
+
           <ALinkStyle href="/dashboard/create">
-            <HeaderItemStyle>Register TM</HeaderItemStyle>
+            <HeaderItemStyle>Register Trademark</HeaderItemStyle>
           </ALinkStyle>
           <ALinkStyle href="/dashboard/search">
             <HeaderItemStyle>Search</HeaderItemStyle>
           </ALinkStyle>
-          <ALinkStyle href="/dashboard">
-            <HeaderItemStyle>Dashboard</HeaderItemStyle>
-          </ALinkStyle>
+          
         </MenuStyle>
         {!accounts ? (
           <ALinkStyle href="/dashboard">

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Input, Field, Button, Select, ToastMessage, Flash } from "rimble-ui";
 import ipfs from "../../utils/ipfs";
-import rem from "../../components/helpers/rem";
+import {withRouter} from 'react-router-dom';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const MainWrapper = styled.div`
   align-items: flex-start;
 `;
 
-export default class CreateTrademark extends Component {
+class CreateTrademark extends Component {
   state = {
     markResponse: false,
     propertyType: "Trademark",
@@ -20,7 +20,7 @@ export default class CreateTrademark extends Component {
     markDesc: "",
     myMarks: null,
     buffer: "",
-    ipfsHash: "QmcuZQyTzivQUH4ZruyR7sMwAjC5yZnMbTqXtFBjS6aD49",
+    ipfsHash: "",
     ipfsImg: ""
   };
 
@@ -61,20 +61,24 @@ export default class CreateTrademark extends Component {
     }); //await ipfs.add
   }; //onSubmit
 
-  getFileFromIPFS = async hash => {
-    //save document to IPFS,return its hash#, and set hash# to state
-    //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
-    await ipfs.get(hash, (err, files) => {
+  
+
+  handleSubmit = async () => {
+    await ipfs.add(this.state.buffer, (err, ipfsHash) => {
       if (err) {
         throw err;
       }
-      files.forEach(file => {
-        console.log(file.path);
-        console.log("File content >> ", file.content);
-        this.setState({ ipfsImg: file.content.toString("base64") });
-      });
+      if (ipfsHash) {
+        this.createMark(
+          this.state.markName,
+          this.state.markDesc,
+          this.state.markType,
+          ipfsHash[0].hash
+        ).then(() => window.history.pushState('/'))
+      }
     });
-  };
+    this.props.history.push("/dashboard");
+  }
 
   render() {
     return (
@@ -116,12 +120,12 @@ export default class CreateTrademark extends Component {
             <Field label="Upload document to prove prior use: ">
               <input type="file" onChange={this.captureFile} />
             </Field>
-            <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
+            {/* <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
             <button onClick={() => this.getFileFromIPFS(this.state.ipfsHash)}>
               get ipfs
-            </button>
+            </button> */}
 
-            {this.state.ipfsImg ? (
+            {/* {this.state.ipfsImg ? (
               <img
                 src={"data:image/png;base64," + this.state.ipfsImg}
                 height="200px"
@@ -129,21 +133,14 @@ export default class CreateTrademark extends Component {
               />
             ) : (
               <p>Not Found</p>
-            )}
+            )} */}
 
             <Button
-              onClick={() => {
-                this.createMark(
-                  this.state.markName,
-                  this.state.markDesc,
-                  this.state.markType,
-                  this.state.ipfsHash
-                );
-
-                // window.toastProvider.addMessage("Created successfully...");
-              }}
+              onClick={() =>
+                this.handleSubmit()
+              }
             >
-              Create
+              Submit
             </Button>
             {/* <Button onClick={() => console.log(this.state)}>Log State</Button> */}
 
@@ -158,11 +155,13 @@ export default class CreateTrademark extends Component {
             />
           </>
         ) : (
-          <>
-            <h3>Register Copyright</h3>
-          </>
-        )}
+            <>
+              <h3>Register Copyright</h3>
+            </>
+          )}
       </MainWrapper>
     );
   }
 }
+
+export default withRouter(CreateTrademark);

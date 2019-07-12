@@ -10,6 +10,7 @@ import CreateTrademark from "../Trademark/CreateTrademark";
 import Header from "../Header/Header";
 import SearchTrademark from "../Trademark/SearchTrademark.js";
 import MyTrademarks from "./MyTrademarks.js";
+import { NotFound } from '../../components/NotFound'
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -101,31 +102,33 @@ class Dashboard extends Component {
     return (
       <div className="Trademark">
         <Router>
-          <Header {...this.state} />
-          <Route
-            exact
-            path="/dashboard"
-            render={() => (
-              <MyTrademarks
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
 
-          <Route
-            path="/dashboard/create"
-            render={() => (
-              <CreateTrademark
-                contract={this.state.contract}
-                accounts={this.state.accounts}
-              />
-            )}
-          />
-          <Route
-            path="/dashboard/search"
-            render={() => <SearchTrademark contract={this.state.contract} />}
-          />
+            <Header {...this.state} />
+            <Route
+              exact
+              path="/dashboard"
+              render={() => (
+                <MyTrademarks
+                  contract={this.state.contract}
+                  accounts={this.state.accounts}
+                />
+              )}
+            />
+
+            <Route
+              path="/dashboard/create"
+              render={() => (
+                <CreateTrademark
+                  contract={this.state.contract}
+                  accounts={this.state.accounts}
+                />
+              )}
+            />
+            <Route
+              path="/dashboard/search"
+              render={() => <SearchTrademark contract={this.state.contract} />}
+            />
+            
         </Router>
       </div>
     );
