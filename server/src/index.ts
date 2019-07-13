@@ -1,5 +1,5 @@
 import { GraphQLServer } from "graphql-yoga";
-import { idArg, queryType, stringArg, objectType } from "nexus";
+import { queryType, stringArg, objectType } from "nexus";
 import { makePrismaSchema, prismaObjectType } from "nexus-prisma";
 import * as path from "path";
 import datamodelInfo from "./generated/nexus-prisma";
