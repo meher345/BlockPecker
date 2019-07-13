@@ -1,6 +1,6 @@
 node_modules
 .secret
-client/src/contracts
+# client/src/contracts
 .DS_Store
 DS_Store
 package-lock.json
