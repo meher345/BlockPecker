@@ -45,16 +45,18 @@ contract Trademark is ERC721 {
         ownedTokens[msg.sender].push(_tokenId);
         // Mapping to track each token associated to each Mark
         tokenIdToMarkInfo[_tokenId] = newMark;
-        
     }
 
     // Implement Task 1 lookUptokenIdToMarkInfo
-    function getMarkFromId (uint _tokenId) public view returns (string memory, string memory, string memory, string memory) {
+    function getMarkFromId (uint _tokenId) public view returns (string memory, string memory, string memory, string memory,
+    string memory, uint256) {
         //1. You should return the Mark saved in tokenIdToMarkInfo mapping
         return (tokenIdToMarkInfo[_tokenId].name,
         tokenIdToMarkInfo[_tokenId].desc,
         tokenIdToMarkInfo[_tokenId].markType,
-        tokenIdToMarkInfo[_tokenId].ipfsHash);
+        tokenIdToMarkInfo[_tokenId].ipfsHash,
+        tokenIdToMarkInfo[_tokenId].className,
+        tokenIdToMarkInfo[_tokenId].timeStamp);
     }
 
     function getOwnedMarks() public view returns(uint256[] memory) {
