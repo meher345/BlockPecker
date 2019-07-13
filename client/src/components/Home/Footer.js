@@ -141,9 +141,9 @@ const Footer = () => {
             <FooterItemsStyle>Privacy Policy</FooterItemsStyle>
             <FooterItemsStyle>TnCs</FooterItemsStyle>
           </FooterRightItemsGroupStyle>
-          {/* <FooterRightItemsGroupStyle>
+          <FooterRightItemsGroupStyle>
             <FooterItemsStyle>Stay in Touch</FooterItemsStyle>
-            <FooterItemsStyle>
+            {/* <FooterItemsStyle>
               <FacebookIcon size="24" />
             </FooterItemsStyle>
             <FooterItemsStyle>
@@ -151,8 +151,8 @@ const Footer = () => {
             </FooterItemsStyle>
             <FooterItemsStyle>
               <GithubIcon size="24" />
-            </FooterItemsStyle>
-          </FooterRightItemsGroupStyle> */}
+            </FooterItemsStyle> */}
+          </FooterRightItemsGroupStyle>
         </FooterRightStyle>
       </FooterStyle>
     </FooterWrapper>
