@@ -50,7 +50,7 @@ const SearchResultsStyle = styled.div`
 
 const EachResultStyle = styled.div`
   display: grid;
-  grid-template-rows: 6;
+  grid-template-rows: 5;
   grid-template-columns: 5fr 5fr;
   background-color: white;
   box-shadow: 5px 5px 6px -4px #efefef;
@@ -71,43 +71,32 @@ const GenericHeading = styled.div`
 `;
 
 const SearchTMCreatedAtStyle = styled.div`
-  grid-row: 1;
+  grid-row: 5;
   grid-column: 1;
   display: flex;
   flex-direction: row;
 `;
-const SearchTMUpdatedAtStyle = styled.div`
-  grid-row: 1;
-  grid-column: 2;
-  display: flex;
-  flex-direction: row;
-`;
-const SearchTMPublishedStyle = styled.div`
-  grid-row: 2;
-  grid-column: 1/3;
-  display: flex;
-  flex-direction: row;
-`;
+
 const SearchTMNameStyle = styled.div`
-  grid-row: 3;
+  grid-row: 1;
   grid-column: 1/3;
   display: flex;
   flex-direction: row;
 `;
 const SearchTMDescStyle = styled.div`
-  grid-row: 4;
+  grid-row: 2;
   grid-column: 1/3;
   display: flex;
   flex-direction: row;
 `;
 const SearchTMTypeStyle = styled.div`
-  grid-row: 5;
+  grid-row: 3;
   grid-column: 1/3;
   display: flex;
   flex-direction: row;
 `;
 const SearchTMClassStyle = styled.div`
-  grid-row: 6;
+  grid-row: 4;
   grid-column: 1/3;
   display: flex;
   flex-direction: row;
@@ -196,26 +185,7 @@ export default class SearchTrademark extends Component {
               <SearchResultsStyle>
                 {this.state.searchResults.map(eachResult => (
                   <EachResultStyle>
-                    <SearchTMCreatedAtStyle>
-                      <GenericHeading>Created: </GenericHeading>
-                      <EachResultItemStyle>
-                        {eachResult.createdAt}
-                      </EachResultItemStyle>
-                    </SearchTMCreatedAtStyle>
-
-                    <SearchTMUpdatedAtStyle>
-                      <GenericHeading>Updated: </GenericHeading>
-                      <EachResultItemStyle>
-                        {eachResult.updatedAt}
-                      </EachResultItemStyle>
-                    </SearchTMUpdatedAtStyle>
-
-                    <SearchTMPublishedStyle>
-                      <GenericHeading>Published: </GenericHeading>
-                      <EachResultItemStyle>
-                        {eachResult.published ? "Yes" : "No"}
-                      </EachResultItemStyle>
-                    </SearchTMPublishedStyle>
+                   
 
                     <SearchTMNameStyle>
                       <GenericHeading>Trademark Name: </GenericHeading>
@@ -244,6 +214,10 @@ export default class SearchTrademark extends Component {
                         {eachResult.class}
                       </EachResultItemStyle>
                     </SearchTMClassStyle>
+
+                    <SearchTMCreatedAtStyle>
+                      <GenericHeading>Created On:</GenericHeading>
+                   </SearchTMCreatedAtStyle>
                   </EachResultStyle>
                 ))}
               </SearchResultsStyle>

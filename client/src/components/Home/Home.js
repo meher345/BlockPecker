@@ -31,7 +31,7 @@ const MainLanding = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 1152px;
-  padding: 20px 20%;
+  padding: 20px 15%;
   text-align: center;
   height: 70vh;
   width: 100%;
@@ -52,12 +52,12 @@ const MainLanding = styled.div`
 const StrongText = styled.div`
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  font-size: ${rem(45)};
+  font-size: ${rem(60)};
   font-weight: 500;
   margin: 0 auto;
   max-width: 750px;
   align-self: center;
-  line-height: ${rem(45)};
+  line-height: ${rem(65)};
   ${phone(css`
     font-size: ${rem(35)};
     font-weight: 500;
@@ -226,6 +226,9 @@ const ALinkStyle = styled.a`
   text-decoration: none;
   color: inherit;
   align-self: center;
+  &:hover{
+    color: inherit;
+  }
 `;
 
 const Home = () => {
@@ -239,7 +242,9 @@ const Home = () => {
             Blockpecker is a Trademark prior use registration platform for
             protecting marks. Minimal cost, Tamper proof and Time stamped.
           </SmallText>
-          <PrimaryButton href="/dashboard"> Get Started </PrimaryButton>
+          <ALinkStyle href="/dashboard">
+          <Button mainColor="black"> Get Started </Button>
+          </ALinkStyle>
         </CenterWrapper>
 
         {/* <IllustrationsWrapper><HomeDesign /></IllustrationsWrapper> */}

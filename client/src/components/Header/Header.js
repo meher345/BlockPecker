@@ -47,7 +47,7 @@ const AccountStyle = styled.div`
 
 const LogoStyle = styled.p`
   font-weight: 800;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   &:hover {
     cursor: pointer;
   }
@@ -58,7 +58,7 @@ const LogoStyle = styled.p`
 
 const HeaderItemStyle = styled.div`
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   &:hover {
     cursor: pointer;
   }
@@ -116,6 +116,9 @@ const AddressStyle = styled.div`
 const ALinkStyle = styled.a`
   text-decoration: none;
   color: inherit;
+  &:hover {
+    color: inherit;
+  }
 `;
 
 export default class Header extends Component {
@@ -150,7 +153,6 @@ export default class Header extends Component {
           <ALinkStyle href="/dashboard/search">
             <HeaderItemStyle>Search</HeaderItemStyle>
           </ALinkStyle>
-          
         </MenuStyle>
         {!accounts ? (
           <ALinkStyle href="/dashboard">
