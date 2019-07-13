@@ -238,14 +238,14 @@ class CreateTrademark extends Component {
                   (see class list)
                 </a>
               </LineAlignmentStyle>
-              <Form.Field label="Name: ">
+              <Form.Field label="Trademark Name: ">
                 <Form.Input
                   width={520}
                   required
                   onChange={e => this.setState({ markName: e.target.value })}
                 />
               </Form.Field>
-              <Form.Field label="Description: ">
+              <Form.Field label="Trademark Description: ">
                 <Textarea
                   width={520}
                   rows={3}

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import { ApolloConsumer } from "react-apollo";
 
 const MainWrapper = styled.div`
   display: flex;
@@ -39,45 +42,189 @@ const SearchBarWrapper = styled.div`
   width: 100%;
 `;
 
+const SearchResultsStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+`;
+
+const EachResultStyle = styled.div`
+  display: grid;
+  grid-template-rows: 5;
+  grid-template-columns: 5fr 5fr;
+  background-color: white;
+  box-shadow: 5px 5px 6px -4px #efefef;
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid #777;
+  grid-row-gap: 8px;
+`;
+
+const EachResultItemStyle = styled.div`
+  font-size: 1rem;
+  padding-left: 5px;
+`;
+
+const GenericHeading = styled.div`
+  font-size: 1.1rem;
+  font-weight: 600;
+`;
+
+const SearchTMCreatedAtStyle = styled.div`
+  grid-row: 5;
+  grid-column: 1;
+  display: flex;
+  flex-direction: row;
+`;
+
+const SearchTMNameStyle = styled.div`
+  grid-row: 1;
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: row;
+`;
+const SearchTMDescStyle = styled.div`
+  grid-row: 2;
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: row;
+`;
+const SearchTMTypeStyle = styled.div`
+  grid-row: 3;
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: row;
+`;
+const SearchTMClassStyle = styled.div`
+  grid-row: 4;
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: row;
+`;
+
+const searchTrademarks = gql`
+  query searchTrademarks($searchString: String!) {
+    searchTrademarks(searchString: $searchString) {
+      id
+      createdAt
+      updatedAt
+      published
+      name
+      description
+      type
+      class
+    }
+  }
+`;
+
 export default class SearchTrademark extends Component {
   state = {
-    wordMarkIDget: null,
-    markResponseText: null
+    searchString: "",
+    searchResults: null
   };
 
-  getMark = async id => {
-    const { contract } = this.props;
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.lookUptokenIdToMarkInfo(id).call();
-    // Update state with the result.
-    this.setState({ markResponseText: response });
-  };
   render() {
     return (
-      <MainWrapper>
-        {/* <h3>Get Mark by ID </h3>
+      // <Query
+      //   query={gql`
+      //     {
+      //       searchTrademarks(searchString: "") {
+      //         id
+      //         createdAt
+      //         updatedAt
+      //         published
+      //         name
+      //         description
+      //         type
+      //       }
+      //     }
+      //   `}
+      // >
+      //   {({ loading, error, data }) => {
+      //     if (loading) return <p>Loading...</p>;
+      //     if (error) return <p>Error :(</p>;
+      //     return data.searchTrademarks.map(
+      //       ({
+      //         id,
+      //         createdAt,
+      //         updatedAt,
+      //         published,
+      //         name,
+      //         description,
+      //         type
+      //       }) => (
+      //         <div key={id}>
+      //           <p>{`${name} by ${description}`}</p>
+      //         </div>
+      //       )
+      //     );
+      //   }}
+      // </Query>
+      <ApolloConsumer>
+        {client => (
+          <MainWrapper>
+            <SearchBarWrapper>
+              <InputStyle
+                onChange={e => this.setState({ searchString: e.target.value })}
+                placeholder="Search..."
+              />
+              <Button
+                onClick={async () => {
+                  const { data } = await client.query({
+                    query: searchTrademarks,
+                    variables: { searchString: this.state.searchString }
+                  });
+                  this.setState({ searchResults: data.searchTrademarks });
+                  console.log(this.state);
+                }}
+              >
+                Search
+              </Button>
+            </SearchBarWrapper>
+            {this.state.searchResults && (
+              <SearchResultsStyle>
+                {this.state.searchResults.map(eachResult => (
+                  <EachResultStyle>
+                   
 
-        <div>
-          <div>Enter ID</div>
-          <input
-            onChange={e => this.setState({ wordMarkIDget: e.target.value })}
-          />
-        </div>
+                    <SearchTMNameStyle>
+                      <GenericHeading>Trademark Name: </GenericHeading>
+                      <EachResultItemStyle>
+                        {eachResult.name}
+                      </EachResultItemStyle>
+                    </SearchTMNameStyle>
 
-        <div>
-          <button
-            onClick={() => this.getMark(this.state.wordMarkIDget)}
-            size="small"
-          >
-            Submit
-          </button>
-        </div>
-        {this.state.markResponseText && <p>{this.state.markResponseText}</p>} */}
-        <SearchBarWrapper>
-          <InputStyle placeholder="Search..." />
-          <Button>Search</Button>
-        </SearchBarWrapper>
-      </MainWrapper>
+                    <SearchTMDescStyle>
+                      <GenericHeading>Trademark Description: </GenericHeading>
+                      <EachResultItemStyle>
+                        {eachResult.description}
+                      </EachResultItemStyle>
+                    </SearchTMDescStyle>
+
+                    <SearchTMTypeStyle>
+                      <GenericHeading>Trademark Type: </GenericHeading>
+                      <EachResultItemStyle>
+                        {eachResult.type}
+                      </EachResultItemStyle>
+                    </SearchTMTypeStyle>
+
+                    <SearchTMClassStyle>
+                      <GenericHeading>Trademark Class: </GenericHeading>
+                      <EachResultItemStyle>
+                        {eachResult.class}
+                      </EachResultItemStyle>
+                    </SearchTMClassStyle>
+
+                    <SearchTMCreatedAtStyle>
+                      <GenericHeading>Created On:</GenericHeading>
+                   </SearchTMCreatedAtStyle>
+                  </EachResultStyle>
+                ))}
+              </SearchResultsStyle>
+            )}
+          </MainWrapper>
+        )}
+      </ApolloConsumer>
     );
   }
 }
