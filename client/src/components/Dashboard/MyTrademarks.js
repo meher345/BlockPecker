@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import ipfs from "../../utils/ipfs";
-import { Card, Button, Container, Image } from "semantic-ui-react";
+import { Card, Button, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const MainWrapper = styled.div`
@@ -26,15 +26,16 @@ export default class MyTrademarks extends Component {
     if (noOfTokens > 0) {
       response.map(async each => {
         const tokenId = each.toNumber();
-        console.log(tokenId);
         await contract.methods
           .getMarkFromId(tokenId)
           .call()
-          .then(data =>
+          .then(data => {
+            var newData = data;
+            newData["tokenId"] = tokenId;
             this.setState({
-              tokenList: [...this.state.tokenList, data]
-            })
-          )
+              tokenList: [...this.state.tokenList, newData]
+            });
+          })
           .catch(e => alert(e));
       });
     }
@@ -84,7 +85,11 @@ export default class MyTrademarks extends Component {
                     <Button onClick={() => this.getFileFromIPFS(value[3])}>
                       get ipfs
                     </Button> */}
-                  <Link to={`/dashboard/view/${index}`}>
+                  <Link
+                    to={`/dashboard/view/${value &&
+                      value.tokenId &&
+                      value.tokenId}`}
+                  >
                     <Button> View Details</Button>
                   </Link>
                 </Card.Content>
