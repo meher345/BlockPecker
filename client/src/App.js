@@ -4,14 +4,14 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
 //local imports
-
+import { apolloEndPoint } from "./config";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home.js";
 import { NotFound } from "./components/NotFound";
 import TMClassList from "./components/Resources/TMClassList";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/"
+  uri: apolloEndPoint
 });
 
 class App extends Component {
