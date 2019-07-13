@@ -12,13 +12,12 @@ contract Trademark is ERC721 {
         string desc;
         string markType;
         string ipfsHash;
+        string className;
+        uint256 timeStamp;
     }
 
     Mark[] marks;
-    uint256[] public allTokens;
     mapping (address => uint256[]) internal ownedTokens;
-    //mapping (address => uint256) internal ownedTokensCount;
-
 
     // Implement Task 1 Add a name and symbol properties
     // name: Is a short name to your token
@@ -30,12 +29,14 @@ contract Trademark is ERC721 {
     mapping(uint256 => Mark) public tokenIdToMarkInfo;
     // mapping the TokenId and price
     mapping(uint256 => uint256) public marksForSale;
-    // Create Mark using the Struct
-    mapping(bytes32 => bool) public markHashMap;
 
-    function createMark(string memory _name, string memory _desc, string memory _markType, string memory _ipfsHash) public {
+    //event starCreated(address owner,  )
+
+    function createMark(string memory _name, string memory _desc, string memory _markType, string memory _ipfsHash,
+    string memory _className) public {
         // Mark is an struct so we are creating a new Mark
-        Mark memory newMark = Mark(_name, _desc, _markType, _ipfsHash);
+        uint256 _timeStamp = now;
+        Mark memory newMark = Mark(_name, _desc, _markType, _ipfsHash, _className, _timeStamp);
         // Adding the Mark to marks and generating an ID
         uint _tokenId = marks.push(newMark) - 1;
         // _mint the token
@@ -44,8 +45,7 @@ contract Trademark is ERC721 {
         ownedTokens[msg.sender].push(_tokenId);
         // Mapping to track each token associated to each Mark
         tokenIdToMarkInfo[_tokenId] = newMark;
-        // Emit event
-        //TODO
+        
     }
 
     // Implement Task 1 lookUptokenIdToMarkInfo
@@ -101,11 +101,11 @@ contract Trademark is ERC721 {
         transferFrom(_to, _from, _toTokenId);
     }
 
-    function transferAMark(address _to1, uint256 _tokenId) public {
+    function transferAMark(address _to, uint256 _tokenId) public {
         //1. Check if the sender is the ownerOf(_tokenId)
         require(ownerOf(_tokenId) == msg.sender, "");
         //2. Use the transferFrom(from, to, tokenId); function to transfer the Mark
-        transferFrom(msg.sender, _to1, _tokenId);
+        transferFrom(msg.sender, _to, _tokenId);
     }
 
 }
