@@ -2,5 +2,6 @@ node_modules
 .secret
 client/src/contracts
 .DS_Store
+DS_Store
 package-lock.json
 client/package-lock.json
