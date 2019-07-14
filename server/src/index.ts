@@ -21,10 +21,12 @@ import { prisma } from "./generated/prisma-client";
 const Trademark = objectType({
   name: "Trademark",
   definition(t) {
+    t.string("id");
     t.string("name");
     t.string("description");
     t.string("className");
     t.string("type");
+    t.string("createdAt");
   }
 });
 

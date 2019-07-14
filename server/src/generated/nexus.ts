@@ -24,7 +24,9 @@ export interface NexusGenRootTypes {
   }
   Trademark: { // root type
     className?: string | null; // String
+    createdAt?: string | null; // String
     description?: string | null; // String
+    id?: string | null; // String
     name?: string | null; // String
     type?: string | null; // String
   }
@@ -51,7 +53,9 @@ export interface NexusGenFieldTypes {
   }
   Trademark: { // field return type
     className: string | null; // String
+    createdAt: string | null; // String
     description: string | null; // String
+    id: string | null; // String
     name: string | null; // String
     type: string | null; // String
   }

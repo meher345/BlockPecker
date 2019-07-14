@@ -17,7 +17,9 @@ type ResponseMessage {
 
 type Trademark {
   className: String
+  createdAt: String
   description: String
+  id: String
   name: String
   type: String
 }

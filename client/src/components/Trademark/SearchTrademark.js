@@ -106,12 +106,11 @@ const searchTrademarks = gql`
   query searchTrademarks($searchString: String!) {
     searchTrademarks(searchString: $searchString) {
       id
-      createdAt
-      updatedAt
       name
       description
       type
       className
+      createdAt
     }
   }
 `;
@@ -183,9 +182,7 @@ export default class SearchTrademark extends Component {
             {this.state.searchResults && (
               <SearchResultsStyle>
                 {this.state.searchResults.map(eachResult => (
-                  <EachResultStyle>
-                   
-
+                  <EachResultStyle key={eachResult.id}>
                     <SearchTMNameStyle>
                       <GenericHeading>Trademark Name: </GenericHeading>
                       <EachResultItemStyle>
@@ -213,10 +210,12 @@ export default class SearchTrademark extends Component {
                         {eachResult.className}
                       </EachResultItemStyle>
                     </SearchTMClassStyle>
-
-                    <SearchTMCreatedAtStyle>
-                      <GenericHeading>Created On:</GenericHeading>
-                   </SearchTMCreatedAtStyle>
+                    <SearchTMClassStyle>
+                      <GenericHeading>Created On </GenericHeading>
+                      <EachResultItemStyle>
+                        {eachResult.createdAt}
+                      </EachResultItemStyle>
+                    </SearchTMClassStyle>
                   </EachResultStyle>
                 ))}
               </SearchResultsStyle>
