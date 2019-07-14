@@ -5,7 +5,7 @@
 scalar DateTime
 
 type Mutation {
-  createTrademark(class: String, description: String, name: String, type: String): Trademark
+  createTrademark(className: String, description: String, name: String, type: String): Trademark
 }
 
 type Query {
@@ -18,12 +18,11 @@ type ResponseMessage {
 }
 
 type Trademark {
-  class: String!
+  className: String!
   createdAt: DateTime!
   description: String
   id: ID!
   name: String!
-  published: Boolean!
   type: String!
   updatedAt: DateTime!
 }
