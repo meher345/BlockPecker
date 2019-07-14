@@ -140,7 +140,7 @@ export default class Header extends Component {
       <HeaderStyle>
         <MenuStyle>
           <ALinkStyle href="/">
-            <LogoStyle>BLOCKPECKER</LogoStyle>
+            <LogoStyle>BLOCKPIED</LogoStyle>
           </ALinkStyle>
 
           <ALinkStyle href="/dashboard">
