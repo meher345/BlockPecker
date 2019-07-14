@@ -1,14 +1,32 @@
 import { GraphQLServer } from "graphql-yoga";
-import { queryType, stringArg, objectType } from "nexus";
+import {
+  queryType,
+  stringArg,
+  objectType,
+  extendType,
+  mutationType
+} from "nexus";
 import { makePrismaSchema, prismaObjectType } from "nexus-prisma";
 import * as path from "path";
 import datamodelInfo from "./generated/nexus-prisma";
 import { prisma } from "./generated/prisma-client";
 
-const Trademark = prismaObjectType({
+// const Trademark = prismaObjectType({
+//   name: "Trademark",
+//   definition(t) {
+//     t.prismaFields(["name", "description", "className", "type"]);
+//   }
+// });
+
+const Trademark = objectType({
   name: "Trademark",
   definition(t) {
-    t.prismaFields(["*"]);
+    t.string("id");
+    t.string("name");
+    t.string("description");
+    t.string("className");
+    t.string("type");
+    t.string("createdAt");
   }
 });
 
@@ -31,7 +49,9 @@ const Query = queryType({
           where: {
             OR: [
               { name_contains: searchString },
-              { description_contains: searchString }
+              { description_contains: searchString },
+              { type_contains: searchString },
+              { className_contains: searchString }
             ]
           }
         });
@@ -48,8 +68,7 @@ const Query = queryType({
   }
 });
 
-const Mutation = prismaObjectType({
-  name: "Mutation",
+const Mutation = mutationType({
   definition(t) {
     t.field("createTrademark", {
       type: "Trademark",
@@ -60,7 +79,6 @@ const Mutation = prismaObjectType({
         className: stringArg()
       },
       resolve: (parent, args, ctx) => {
-        
         return ctx.prisma.createTrademark({
           name: args.name,
           description: args.description,
