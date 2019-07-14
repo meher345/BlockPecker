@@ -240,7 +240,7 @@ const Home = () => {
         <CenterWrapper>
           <StrongText>Trademarks on the blockchain, simplified</StrongText>
           <SmallText>
-            Blockpecker is a Trademark prior use registration platform for
+            Blockpied is a Trademark prior use registration platform for
             protecting marks. Minimal cost, Tamper proof and Time stamped.
           </SmallText>
           <ALinkStyle href="/dashboard">
@@ -256,7 +256,7 @@ const Home = () => {
         <SmallText>Register your Intellectual Property on Blockchain</SmallText>
 
         <OurPlatformStyle>
-          <LogoStyle>BLOCKPECKER</LogoStyle>
+          <LogoStyle>BLOCKPIED</LogoStyle>
           <img
             alt=""
             width="160px"
@@ -275,10 +275,9 @@ const Home = () => {
               {/* <BulbIcon size="42" /> */}
               <CardHeader>Register Trademarks</CardHeader>
               <CardContent>
-                Form an Individual to a Corporation, building and nurturing
-                Brands is the key to market success. Blockpecker allows you to
-                manage your Trademarks on the go. Safe and secure. Compliance?
-                Sorted!    
+                Do you know unregistered trademarks also have rights ?
+                Click on more below to read more about it. Blockpied allows you to
+                register your Trademarks on the go. Safe and secure. Proof of Ownership? Sorted.   
               </CardContent>
             </Card>
           </CardContainer>
@@ -288,23 +287,19 @@ const Home = () => {
               <CardHeader>Register Copyrights </CardHeader>
               <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
-                Form an Individual to a Corporation, building and nurturing
-                Brands is the key to market success. blockpecker allows you to
-                manage your Trademarks on the go. Safe and secure. Compliance?
-                Sorted!
+              Blockpied provides a great system for recording rights that are created in “original works of authorship,” 
+              which can be anything from a photograph to a book, to a website, to a doctoral thesis, to a movie story. 
               </CardContent>
             </Card>
           </CardContainer>
           <CardContainer>
             <Card>
               {/* <DesignIcon size="42" /> */}
-              <CardHeader>Transfer of Ownership</CardHeader>
+              <CardHeader>Licensing</CardHeader>
               <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
-                Form an Individual to a Corporation, building and nurturing
-                Brands is the key to market success. blockpecker allows you to
-                manage your Trademarks on the go. Safe and secure. Compliance?
-                Sorted!
+                Blockpied helps you license your Intellectual Property online. 
+                You can also transfer ownerhsip to a different parties. 
               </CardContent>
             </Card>
           </CardContainer>

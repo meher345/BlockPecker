@@ -59,6 +59,13 @@ const FooterRightStyle = styled.div`
   padding: 0;
 `;
 
+const mailto = styled.div`
+display:block;
+  width:100px;
+  height:20px;
+`;
+
+
 const FooterRightItemsGroupStyle = styled.div`
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -117,10 +124,15 @@ const Footer = () => {
             {/* <LogoStyle>iprhub</LogoStyle> */}
           </StyledLink>
           <FooterItemsStyle>
-            © Copyright 2019 iprhub. All rights reserved.
+            © Copyright 2019 Blockpied. All rights reserved.
           </FooterItemsStyle>
         </FooterLeftStyle>
         <FooterRightStyle>
+          <FooterItemsStyle>Any Questions? Contact Us</FooterItemsStyle>
+          <StyledLink className="mailto" href="mailto:contact@test.com">
+          </StyledLink>
+        </FooterRightStyle>
+        {/* <FooterRightStyle>
           <FooterRightItemsGroupStyle>
             <FooterItemsStyle>Company</FooterItemsStyle>
             <StyledLink to="/">
@@ -143,7 +155,7 @@ const Footer = () => {
           </FooterRightItemsGroupStyle>
           <FooterRightItemsGroupStyle>
             <FooterItemsStyle>Stay in Touch</FooterItemsStyle>
-            {/* <FooterItemsStyle>
+             <FooterItemsStyle>
               <FacebookIcon size="24" />
             </FooterItemsStyle>
             <FooterItemsStyle>
@@ -151,9 +163,9 @@ const Footer = () => {
             </FooterItemsStyle>
             <FooterItemsStyle>
               <GithubIcon size="24" />
-            </FooterItemsStyle> */}
+            </FooterItemsStyle> 
           </FooterRightItemsGroupStyle>
-        </FooterRightStyle>
+        </FooterRightStyle> */}
       </FooterStyle>
     </FooterWrapper>
   );
