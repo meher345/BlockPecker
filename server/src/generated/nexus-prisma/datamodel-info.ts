@@ -349,22 +349,6 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "published",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
@@ -409,7 +393,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "args": [],
             "type": {
@@ -434,16 +418,6 @@ export default {
         "kind": "SCALAR",
         "name": "DateTime",
         "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -810,26 +784,6 @@ export default {
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "published",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "published_not",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -1303,7 +1257,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1313,7 +1267,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_not",
+            "name": "className_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1323,7 +1277,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_in",
+            "name": "className_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1341,7 +1295,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_not_in",
+            "name": "className_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1359,7 +1313,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_lt",
+            "name": "className_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1369,7 +1323,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_lte",
+            "name": "className_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1379,7 +1333,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_gt",
+            "name": "className_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1389,7 +1343,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_gte",
+            "name": "className_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1399,7 +1353,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_contains",
+            "name": "className_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1409,7 +1363,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_not_contains",
+            "name": "className_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1419,7 +1373,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_starts_with",
+            "name": "className_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1429,7 +1383,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_not_starts_with",
+            "name": "className_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1439,7 +1393,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_ends_with",
+            "name": "className_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1449,7 +1403,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class_not_ends_with",
+            "name": "className_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1562,18 +1516,6 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "published_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "published_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name_ASC",
             "description": null,
             "isDeprecated": false,
@@ -1610,13 +1552,13 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "class_ASC",
+            "name": "className_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "class_DESC",
+            "name": "className_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1761,6 +1703,16 @@ export default {
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2115,16 +2067,6 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "published",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -2163,7 +2105,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -2188,16 +2130,6 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "published",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -2228,7 +2160,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2249,16 +2181,6 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "published",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -2289,7 +2211,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2667,22 +2589,6 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "published",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
@@ -2727,7 +2633,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "class",
+            "name": "className",
             "description": null,
             "args": [],
             "type": {

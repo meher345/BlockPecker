@@ -57,14 +57,15 @@ const Mutation = prismaObjectType({
         name: stringArg(),
         description: stringArg(),
         type: stringArg(),
-        class: stringArg()
+        className: stringArg()
       },
       resolve: (parent, args, ctx) => {
+        
         return ctx.prisma.createTrademark({
           name: args.name,
           description: args.description,
           type: args.type,
-          class: args.class
+          className: args.className
         });
       }
     });

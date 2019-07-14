@@ -23,12 +23,11 @@ export interface NexusGenRootTypes {
     message?: string | null; // String
   }
   Trademark: { // root type
-    class: string; // String!
+    className: string; // String!
     createdAt: any; // DateTime!
     description?: string | null; // String
     id: string; // ID!
     name: string; // String!
-    published: boolean; // Boolean!
     type: string; // String!
     updatedAt: any; // DateTime!
   }
@@ -55,12 +54,11 @@ export interface NexusGenFieldTypes {
     message: string | null; // String
   }
   Trademark: { // field return type
-    class: string; // String!
+    className: string; // String!
     createdAt: any; // DateTime!
     description: string | null; // String
     id: string; // ID!
     name: string; // String!
-    published: boolean; // Boolean!
     type: string; // String!
     updatedAt: any; // DateTime!
   }
@@ -69,7 +67,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Mutation: {
     createTrademark: { // args
-      class?: string | null; // String
+      className?: string | null; // String
       description?: string | null; // String
       name?: string | null; // String
       type?: string | null; // String

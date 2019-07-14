@@ -106,26 +106,30 @@ export type TrademarkOrderByInput =
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC"
-  | "published_ASC"
-  | "published_DESC"
   | "name_ASC"
   | "name_DESC"
   | "description_ASC"
   | "description_DESC"
   | "type_ASC"
   | "type_DESC"
-  | "class_ASC"
-  | "class_DESC";
+  | "className_ASC"
+  | "className_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export interface TrademarkCreateInput {
   id?: ID_Input;
-  published?: Boolean;
   name: String;
   description?: String;
   type: String;
-  class: String;
+  className: String;
+}
+
+export interface TrademarkUpdateInput {
+  name?: String;
+  description?: String;
+  type?: String;
+  className?: String;
 }
 
 export interface TrademarkWhereInput {
@@ -159,8 +163,6 @@ export interface TrademarkWhereInput {
   updatedAt_lte?: DateTimeInput;
   updatedAt_gt?: DateTimeInput;
   updatedAt_gte?: DateTimeInput;
-  published?: Boolean;
-  published_not?: Boolean;
   name?: String;
   name_not?: String;
   name_in?: String[] | String;
@@ -203,39 +205,30 @@ export interface TrademarkWhereInput {
   type_not_starts_with?: String;
   type_ends_with?: String;
   type_not_ends_with?: String;
-  class?: String;
-  class_not?: String;
-  class_in?: String[] | String;
-  class_not_in?: String[] | String;
-  class_lt?: String;
-  class_lte?: String;
-  class_gt?: String;
-  class_gte?: String;
-  class_contains?: String;
-  class_not_contains?: String;
-  class_starts_with?: String;
-  class_not_starts_with?: String;
-  class_ends_with?: String;
-  class_not_ends_with?: String;
+  className?: String;
+  className_not?: String;
+  className_in?: String[] | String;
+  className_not_in?: String[] | String;
+  className_lt?: String;
+  className_lte?: String;
+  className_gt?: String;
+  className_gte?: String;
+  className_contains?: String;
+  className_not_contains?: String;
+  className_starts_with?: String;
+  className_not_starts_with?: String;
+  className_ends_with?: String;
+  className_not_ends_with?: String;
   AND?: TrademarkWhereInput[] | TrademarkWhereInput;
   OR?: TrademarkWhereInput[] | TrademarkWhereInput;
   NOT?: TrademarkWhereInput[] | TrademarkWhereInput;
 }
 
-export interface TrademarkUpdateInput {
-  published?: Boolean;
-  name?: String;
-  description?: String;
-  type?: String;
-  class?: String;
-}
-
 export interface TrademarkUpdateManyMutationInput {
-  published?: Boolean;
   name?: String;
   description?: String;
   type?: String;
-  class?: String;
+  className?: String;
 }
 
 export interface TrademarkSubscriptionWhereInput {
@@ -276,66 +269,6 @@ export interface TrademarkEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface TrademarkPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  published: Boolean;
-  name: String;
-  description?: String;
-  type: String;
-  class: String;
-}
-
-export interface TrademarkPreviousValuesPromise
-  extends Promise<TrademarkPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  type: () => Promise<String>;
-  class: () => Promise<String>;
-}
-
-export interface TrademarkPreviousValuesSubscription
-  extends Promise<AsyncIterator<TrademarkPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<String>>;
-  class: () => Promise<AsyncIterator<String>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface BatchPayload {
   count: Long;
 }
@@ -352,20 +285,36 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface AggregateTrademark {
-  count: Int;
+export interface Trademark {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+  description?: String;
+  type: String;
+  className: String;
 }
 
-export interface AggregateTrademarkPromise
-  extends Promise<AggregateTrademark>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface TrademarkPromise extends Promise<Trademark>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  type: () => Promise<String>;
+  className: () => Promise<String>;
 }
 
-export interface AggregateTrademarkSubscription
-  extends Promise<AsyncIterator<AggregateTrademark>>,
+export interface TrademarkSubscription
+  extends Promise<AsyncIterator<Trademark>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<String>>;
+  className: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TrademarkSubscriptionPayload {
@@ -393,41 +342,6 @@ export interface TrademarkSubscriptionPayloadSubscription
   previousValues: <T = TrademarkPreviousValuesSubscription>() => T;
 }
 
-export interface Trademark {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  published: Boolean;
-  name: String;
-  description?: String;
-  type: String;
-  class: String;
-}
-
-export interface TrademarkPromise extends Promise<Trademark>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  published: () => Promise<Boolean>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  type: () => Promise<String>;
-  class: () => Promise<String>;
-}
-
-export interface TrademarkSubscription
-  extends Promise<AsyncIterator<Trademark>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  published: () => Promise<AsyncIterator<Boolean>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<String>>;
-  class: () => Promise<AsyncIterator<String>>;
-}
-
 export interface TrademarkConnection {
   pageInfo: PageInfo;
   edges: TrademarkEdge[];
@@ -449,10 +363,99 @@ export interface TrademarkConnectionSubscription
   aggregate: <T = AggregateTrademarkSubscription>() => T;
 }
 
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTrademark {
+  count: Int;
+}
+
+export interface AggregateTrademarkPromise
+  extends Promise<AggregateTrademark>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTrademarkSubscription
+  extends Promise<AsyncIterator<AggregateTrademark>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TrademarkPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+  description?: String;
+  type: String;
+  className: String;
+}
+
+export interface TrademarkPreviousValuesPromise
+  extends Promise<TrademarkPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  type: () => Promise<String>;
+  className: () => Promise<String>;
+}
+
+export interface TrademarkPreviousValuesSubscription
+  extends Promise<AsyncIterator<TrademarkPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<String>>;
+  className: () => Promise<AsyncIterator<String>>;
+}
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -465,22 +468,6 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 export type Long = string;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
 
 /**
  * Model Metadata

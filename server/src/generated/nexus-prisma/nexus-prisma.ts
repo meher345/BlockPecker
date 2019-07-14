@@ -140,21 +140,19 @@ type TrademarkObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
-  | { name: 'published', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'type', args?: [] | false, alias?: string  } 
-  | { name: 'class', args?: [] | false, alias?: string  } 
+  | { name: 'className', args?: [] | false, alias?: string  } 
 
 type TrademarkFields =
   | 'id'
   | 'createdAt'
   | 'updatedAt'
-  | 'published'
   | 'name'
   | 'description'
   | 'type'
-  | 'class'
+  | 'className'
 
 
 
@@ -185,14 +183,6 @@ export interface TrademarkFieldDetails {
     nullable: false
     resolve: undefined
   }
-  published: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
   name: {
     type: 'String'
     args: {}
@@ -217,7 +207,7 @@ export interface TrademarkFieldDetails {
     nullable: false
     resolve: undefined
   }
-  class: {
+  className: {
     type: 'String'
     args: {}
     description: string
@@ -661,21 +651,19 @@ type TrademarkPreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
-  | { name: 'published', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'type', args?: [] | false, alias?: string  } 
-  | { name: 'class', args?: [] | false, alias?: string  } 
+  | { name: 'className', args?: [] | false, alias?: string  } 
 
 type TrademarkPreviousValuesFields =
   | 'id'
   | 'createdAt'
   | 'updatedAt'
-  | 'published'
   | 'name'
   | 'description'
   | 'type'
-  | 'class'
+  | 'className'
 
 
 
@@ -706,14 +694,6 @@ export interface TrademarkPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
-  published: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
   name: {
     type: 'String'
     args: {}
@@ -738,7 +718,7 @@ export interface TrademarkPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
-  class: {
+  className: {
     type: 'String'
     args: {}
     description: string
@@ -788,8 +768,6 @@ export interface TrademarkWhereInput {
   updatedAt_lte?: string | null
   updatedAt_gt?: string | null
   updatedAt_gte?: string | null
-  published?: boolean | null
-  published_not?: boolean | null
   name?: string | null
   name_not?: string | null
   name_in?: string[]
@@ -832,20 +810,20 @@ export interface TrademarkWhereInput {
   type_not_starts_with?: string | null
   type_ends_with?: string | null
   type_not_ends_with?: string | null
-  class?: string | null
-  class_not?: string | null
-  class_in?: string[]
-  class_not_in?: string[]
-  class_lt?: string | null
-  class_lte?: string | null
-  class_gt?: string | null
-  class_gte?: string | null
-  class_contains?: string | null
-  class_not_contains?: string | null
-  class_starts_with?: string | null
-  class_not_starts_with?: string | null
-  class_ends_with?: string | null
-  class_not_ends_with?: string | null
+  className?: string | null
+  className_not?: string | null
+  className_in?: string[]
+  className_not_in?: string[]
+  className_lt?: string | null
+  className_lte?: string | null
+  className_gt?: string | null
+  className_gte?: string | null
+  className_contains?: string | null
+  className_not_contains?: string | null
+  className_starts_with?: string | null
+  className_not_starts_with?: string | null
+  className_ends_with?: string | null
+  className_not_ends_with?: string | null
   AND?: TrademarkWhereInput[]
   OR?: TrademarkWhereInput[]
   NOT?: TrademarkWhereInput[]
@@ -882,8 +860,6 @@ export type TrademarkWhereInputInputObject =
   | { name: 'updatedAt_lte', alias?: string  } 
   | { name: 'updatedAt_gt', alias?: string  } 
   | { name: 'updatedAt_gte', alias?: string  } 
-  | { name: 'published', alias?: string  } 
-  | { name: 'published_not', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'name_not', alias?: string  } 
   | { name: 'name_in', alias?: string  } 
@@ -926,70 +902,64 @@ export type TrademarkWhereInputInputObject =
   | { name: 'type_not_starts_with', alias?: string  } 
   | { name: 'type_ends_with', alias?: string  } 
   | { name: 'type_not_ends_with', alias?: string  } 
-  | { name: 'class', alias?: string  } 
-  | { name: 'class_not', alias?: string  } 
-  | { name: 'class_in', alias?: string  } 
-  | { name: 'class_not_in', alias?: string  } 
-  | { name: 'class_lt', alias?: string  } 
-  | { name: 'class_lte', alias?: string  } 
-  | { name: 'class_gt', alias?: string  } 
-  | { name: 'class_gte', alias?: string  } 
-  | { name: 'class_contains', alias?: string  } 
-  | { name: 'class_not_contains', alias?: string  } 
-  | { name: 'class_starts_with', alias?: string  } 
-  | { name: 'class_not_starts_with', alias?: string  } 
-  | { name: 'class_ends_with', alias?: string  } 
-  | { name: 'class_not_ends_with', alias?: string  } 
+  | { name: 'className', alias?: string  } 
+  | { name: 'className_not', alias?: string  } 
+  | { name: 'className_in', alias?: string  } 
+  | { name: 'className_not_in', alias?: string  } 
+  | { name: 'className_lt', alias?: string  } 
+  | { name: 'className_lte', alias?: string  } 
+  | { name: 'className_gt', alias?: string  } 
+  | { name: 'className_gte', alias?: string  } 
+  | { name: 'className_contains', alias?: string  } 
+  | { name: 'className_not_contains', alias?: string  } 
+  | { name: 'className_starts_with', alias?: string  } 
+  | { name: 'className_not_starts_with', alias?: string  } 
+  | { name: 'className_ends_with', alias?: string  } 
+  | { name: 'className_not_ends_with', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
 export interface TrademarkCreateInput {
   id?: string | null
-  published?: boolean | null
   name?: string
   description?: string | null
   type?: string
-  class?: string
+  className?: string
 }
 export type TrademarkCreateInputInputObject =
   | Extract<keyof TrademarkCreateInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'published', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'type', alias?: string  } 
-  | { name: 'class', alias?: string  } 
+  | { name: 'className', alias?: string  } 
   
 export interface TrademarkUpdateInput {
-  published?: boolean | null
   name?: string | null
   description?: string | null
   type?: string | null
-  class?: string | null
+  className?: string | null
 }
 export type TrademarkUpdateInputInputObject =
   | Extract<keyof TrademarkUpdateInput, string>
-  | { name: 'published', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'type', alias?: string  } 
-  | { name: 'class', alias?: string  } 
+  | { name: 'className', alias?: string  } 
   
 export interface TrademarkUpdateManyMutationInput {
-  published?: boolean | null
   name?: string | null
   description?: string | null
   type?: string | null
-  class?: string | null
+  className?: string | null
 }
 export type TrademarkUpdateManyMutationInputInputObject =
   | Extract<keyof TrademarkUpdateManyMutationInput, string>
-  | { name: 'published', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'type', alias?: string  } 
-  | { name: 'class', alias?: string  } 
+  | { name: 'className', alias?: string  } 
   
 export interface TrademarkSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -1020,16 +990,14 @@ export type TrademarkOrderByInputValues =
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
   | 'updatedAt_DESC'
-  | 'published_ASC'
-  | 'published_DESC'
   | 'name_ASC'
   | 'name_DESC'
   | 'description_ASC'
   | 'description_DESC'
   | 'type_ASC'
   | 'type_DESC'
-  | 'class_ASC'
-  | 'class_DESC'
+  | 'className_ASC'
+  | 'className_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

@@ -108,11 +108,10 @@ const searchTrademarks = gql`
       id
       createdAt
       updatedAt
-      published
       name
       description
       type
-      class
+      className
     }
   }
 `;
@@ -211,7 +210,7 @@ export default class SearchTrademark extends Component {
                     <SearchTMClassStyle>
                       <GenericHeading>Trademark Class: </GenericHeading>
                       <EachResultItemStyle>
-                        {eachResult.class}
+                        {eachResult.className}
                       </EachResultItemStyle>
                     </SearchTMClassStyle>
 

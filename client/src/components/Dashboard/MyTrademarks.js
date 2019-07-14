@@ -24,6 +24,22 @@ export default class MyTrademarks extends Component {
   state = {
     tokenList: []
   };
+
+  getFileFromIPFS = async hash => {
+    //save document to IPFS,return its hash#, and set hash# to state
+    //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
+    var result = "";
+    await ipfs.get(hash, (err, files) => {
+      if (err) {
+        throw err;
+      }
+      files.forEach(file => {
+        result = file.content.toString("base64");
+      });
+    });
+    return result;
+  };
+
   async componentDidMount() {
     const { contract, accounts } = this.props;
 
@@ -37,9 +53,10 @@ export default class MyTrademarks extends Component {
         await contract.methods
           .getMarkFromId(tokenId)
           .call()
-          .then(data => {
+          .then(async data => {
             var newData = data;
             newData["tokenId"] = tokenId;
+
             this.setState({
               tokenList: [...this.state.tokenList, newData]
             });
@@ -49,24 +66,19 @@ export default class MyTrademarks extends Component {
     }
   }
 
-
-  getFileFromIPFS = async hash => {
-    //save document to IPFS,return its hash#, and set hash# to state
-    //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
-    await ipfs.get(hash, (err, files) => {
-      if (err) {
-        throw err;
-      }
-      files.forEach(file => {
-        this.setState({ ipfsImg: file.content.toString("base64") });
-      });
-    });
-  };
-
   render() {
+    console.log(this.state);
     return (
       <MainWrapper>
-        <Header size="huge">My Items</Header>
+        <div>
+          <Header size="huge" floated="left">
+            My Items
+          </Header>
+
+          <Button icon floated="right" onClick={() => window.location.reload()}>
+            <Icon name="refresh" />
+          </Button>
+        </div>
         <Divider />
         {this.state.tokenList && (
           <Card.Group itemsPerRow={3}>
@@ -75,31 +87,26 @@ export default class MyTrademarks extends Component {
                 <Card.Content>
                   <Card.Header>{value[0]}</Card.Header>
                   <Card.Description>{value[2]}</Card.Description>
-
-                  
                 </Card.Content>
 
                 <Card.Content extra>
                   <Card.Meta>{value[4]}</Card.Meta>
                   <Card.Meta>{convertTimeStamp(value[5].toNumber())}</Card.Meta>
-                  
                 </Card.Content>
 
                 <Card.Content extra>
-                  <div className='ui buttons'>
+                  <div className="ui buttons">
                     <Link
                       to={`/dashboard/view/${value &&
                         value.tokenId &&
                         value.tokenId}`}
                     >
-                      <Button basic color='green'>
+                      <Button basic color="green">
                         View Details
-                    </Button>
+                      </Button>
                     </Link>
                   </div>
                 </Card.Content>
-
-
               </Card>
             ))}
             <Card>
