@@ -23,20 +23,16 @@ export interface NexusGenRootTypes {
     message?: string | null; // String
   }
   Trademark: { // root type
-    className: string; // String!
-    createdAt: any; // DateTime!
+    className?: string | null; // String
     description?: string | null; // String
-    id: string; // ID!
-    name: string; // String!
-    type: string; // String!
-    updatedAt: any; // DateTime!
+    name?: string | null; // String
+    type?: string | null; // String
   }
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
-  DateTime: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
@@ -54,13 +50,10 @@ export interface NexusGenFieldTypes {
     message: string | null; // String
   }
   Trademark: { // field return type
-    className: string; // String!
-    createdAt: any; // DateTime!
+    className: string | null; // String
     description: string | null; // String
-    id: string; // ID!
-    name: string; // String!
-    type: string; // String!
-    updatedAt: any; // DateTime!
+    name: string | null; // String
+    type: string | null; // String
   }
 }
 
@@ -93,7 +86,7 @@ export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 
