@@ -8,6 +8,7 @@ import { phone } from "../helpers/mediaQueries";
 import rem from "../helpers/rem";
 import Footer from "./Footer";
 import Header from "../Header/Header";
+import { CardMeta } from "semantic-ui-react";
 // import { PlusIcon } from "../../static/Icons";
 
 const LogoStyle = styled.p`
@@ -272,18 +273,20 @@ const Home = () => {
           <CardContainer>
             <Card>
               {/* <BulbIcon size="42" /> */}
-              <CardHeader>Patents</CardHeader>
+              <CardHeader>Register Trademarks</CardHeader>
               <CardContent>
-                All your inventions safe and secure, on the cloud. Collaborate
-                with Patent Agents/Attorneys. With blockpecker sit back, relax
-                and manage your Patents at the click of a button.
+                Form an Individual to a Corporation, building and nurturing
+                Brands is the key to market success. Blockpecker allows you to
+                manage your Trademarks on the go. Safe and secure. Compliance?
+                Sorted!    
               </CardContent>
             </Card>
           </CardContainer>
           <CardContainer>
             <Card>
               {/* <TMIcon size="42" /> */}
-              <CardHeader>Trademarks</CardHeader>
+              <CardHeader>Register Copyrights </CardHeader>
+              <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
                 Form an Individual to a Corporation, building and nurturing
                 Brands is the key to market success. blockpecker allows you to
@@ -295,13 +298,13 @@ const Home = () => {
           <CardContainer>
             <Card>
               {/* <DesignIcon size="42" /> */}
-              <CardHeader>Design</CardHeader>
+              <CardHeader>Transfer of Ownership</CardHeader>
+              <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
-                While you were working on evolving that new design language for
-                your products. We are hard at work to design a plat form that
-                allows you to identify competent IPR Attorneys who help you
-                secure your IPR over your Designs. No matter the size of your
-                portfolio, blockpecker has you covered.
+                Form an Individual to a Corporation, building and nurturing
+                Brands is the key to market success. blockpecker allows you to
+                manage your Trademarks on the go. Safe and secure. Compliance?
+                Sorted!
               </CardContent>
             </Card>
           </CardContainer>
