@@ -55,11 +55,10 @@ type Trademark {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   name: String!
   description: String
   type: String!
-  class: String!
+  className: String!
 }
 
 type TrademarkConnection {
@@ -70,11 +69,10 @@ type TrademarkConnection {
 
 input TrademarkCreateInput {
   id: ID
-  published: Boolean
   name: String!
   description: String
   type: String!
-  class: String!
+  className: String!
 }
 
 type TrademarkEdge {
@@ -89,27 +87,24 @@ enum TrademarkOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  published_ASC
-  published_DESC
   name_ASC
   name_DESC
   description_ASC
   description_DESC
   type_ASC
   type_DESC
-  class_ASC
-  class_DESC
+  className_ASC
+  className_DESC
 }
 
 type TrademarkPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  published: Boolean!
   name: String!
   description: String
   type: String!
-  class: String!
+  className: String!
 }
 
 type TrademarkSubscriptionPayload {
@@ -131,19 +126,17 @@ input TrademarkSubscriptionWhereInput {
 }
 
 input TrademarkUpdateInput {
-  published: Boolean
   name: String
   description: String
   type: String
-  class: String
+  className: String
 }
 
 input TrademarkUpdateManyMutationInput {
-  published: Boolean
   name: String
   description: String
   type: String
-  class: String
+  className: String
 }
 
 input TrademarkWhereInput {
@@ -177,8 +170,6 @@ input TrademarkWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  published: Boolean
-  published_not: Boolean
   name: String
   name_not: String
   name_in: [String!]
@@ -221,20 +212,20 @@ input TrademarkWhereInput {
   type_not_starts_with: String
   type_ends_with: String
   type_not_ends_with: String
-  class: String
-  class_not: String
-  class_in: [String!]
-  class_not_in: [String!]
-  class_lt: String
-  class_lte: String
-  class_gt: String
-  class_gte: String
-  class_contains: String
-  class_not_contains: String
-  class_starts_with: String
-  class_not_starts_with: String
-  class_ends_with: String
-  class_not_ends_with: String
+  className: String
+  className_not: String
+  className_in: [String!]
+  className_not_in: [String!]
+  className_lt: String
+  className_lte: String
+  className_gt: String
+  className_gte: String
+  className_contains: String
+  className_not_contains: String
+  className_starts_with: String
+  className_not_starts_with: String
+  className_ends_with: String
+  className_not_ends_with: String
   AND: [TrademarkWhereInput!]
   OR: [TrademarkWhereInput!]
   NOT: [TrademarkWhereInput!]

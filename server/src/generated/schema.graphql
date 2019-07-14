@@ -2,10 +2,8 @@
 ### Do not make changes to this file directly
 
 
-scalar DateTime
-
 type Mutation {
-  createTrademark(class: String, description: String, name: String, type: String): Trademark
+  createTrademark(className: String, description: String, name: String, type: String): Trademark
 }
 
 type Query {
@@ -18,12 +16,10 @@ type ResponseMessage {
 }
 
 type Trademark {
-  class: String!
-  createdAt: DateTime!
+  className: String
+  createdAt: String
   description: String
-  id: ID!
-  name: String!
-  published: Boolean!
-  type: String!
-  updatedAt: DateTime!
+  id: String
+  name: String
+  type: String
 }

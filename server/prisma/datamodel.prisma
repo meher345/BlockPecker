@@ -2,9 +2,8 @@ type Trademark {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  published: Boolean! @default(value: false)
   name: String!
   description: String
   type: String!
-  class: String!
+  className: String!
 }

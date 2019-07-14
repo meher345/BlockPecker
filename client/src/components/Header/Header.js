@@ -46,7 +46,7 @@ const AccountStyle = styled.div`
 `;
 
 const LogoStyle = styled.p`
-  font-weight: 800;
+  font-weight: 500;
   font-size: 1.8rem;
   &:hover {
     cursor: pointer;
@@ -57,8 +57,8 @@ const LogoStyle = styled.p`
 `;
 
 const HeaderItemStyle = styled.div`
-  font-weight: 500;
-  font-size: 1.4rem;
+  font-weight: 300;
+  font-size: 1.2rem;
   &:hover {
     cursor: pointer;
   }
@@ -140,7 +140,7 @@ export default class Header extends Component {
       <HeaderStyle>
         <MenuStyle>
           <ALinkStyle href="/">
-            <LogoStyle>BLOCKPECKER</LogoStyle>
+            <LogoStyle>BLOCKPIED</LogoStyle>
           </ALinkStyle>
 
           <ALinkStyle href="/dashboard">

@@ -8,6 +8,7 @@ import { phone } from "../helpers/mediaQueries";
 import rem from "../helpers/rem";
 import Footer from "./Footer";
 import Header from "../Header/Header";
+import { CardMeta, Icon } from "semantic-ui-react";
 // import { PlusIcon } from "../../static/Icons";
 
 const LogoStyle = styled.p`
@@ -58,6 +59,7 @@ const StrongText = styled.div`
   max-width: 750px;
   align-self: center;
   line-height: ${rem(65)};
+  padding-bottom: 1rem;
   ${phone(css`
     font-size: ${rem(35)};
     font-weight: 500;
@@ -75,14 +77,6 @@ const StrongText2 = styled.div`
   ${phone(css`
     font-size: ${rem(24)};
     font-weight: 500;
-  `)};
-`;
-
-const IllustrationsWrapper = styled.div`
-  width: 40vw;
-  ${phone(css`
-    width: 80vw;
-    align-self: center;
   `)};
 `;
 
@@ -149,6 +143,7 @@ const CardHeader = styled.div`
   font-size: ${rem(30)};
   font-weight: 500;
   margin-top: 8px;
+  padding-bottom: 1rem;
   ${phone(css`
     box-sizing: content-box;
     font-size: ${rem(24)};
@@ -161,33 +156,6 @@ const CardContent = styled.p`
   font-weight: 300;
 `;
 
-const PrimaryButton = styled.a`
-  background-color: #3fda97;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: ${rem(20)};
-  font-weight: 600;
-  line-height: 1.42857;
-  margin-bottom: 0;
-  min-width: 8px;
-  padding: 8px 16px;
-  position: relative;
-  text-align: center;
-  transition-delay: 0s, 0s, 0s;
-  transition-duration: 0.1s, 0.1s, 50ms;
-  &:hover {
-    background-color: #25c17e;
-    outline: 0;
-  }
-  ${phone(css`
-    margin-top: auto;
-    margin-bottom: 2vh;
-  `)};
-`;
 
 const CenterWrapper = styled.div`
   display: flex;
@@ -200,6 +168,8 @@ const SmallText = styled.p`
   font-size: ${rem(21)};
   line-height: 1.9rem;
   font-weight: 300;
+  align-items: center;
+  align-content: center;
   ${phone(css`
     font-size: ${rem(18)};
 
@@ -212,6 +182,7 @@ const OurPlatformStyle = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
   /* align-self: center; */
 `;
 
@@ -219,14 +190,15 @@ const PlatformPage = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 35%;
-  /* justify-content: center; */
+  justify-content: center;
+  align-items: center;
 `;
 
-const ALinkStyle = styled.a`
+export const ALinkStyle = styled.a`
   text-decoration: none;
   color: inherit;
   align-self: center;
-  &:hover{
+  &:hover {
     color: inherit;
   }
 `;
@@ -239,11 +211,11 @@ const Home = () => {
         <CenterWrapper>
           <StrongText>Trademarks on the blockchain, simplified</StrongText>
           <SmallText>
-            Blockpecker is a Trademark prior use registration platform for
+            Blockpied is a Trademark prior use registration platform for
             protecting marks. Minimal cost, Tamper proof and Time stamped.
           </SmallText>
           <ALinkStyle href="/dashboard">
-          <Button mainColor="black"> Get Started </Button>
+            <Button mainColor="black"> Get Started </Button>
           </ALinkStyle>
         </CenterWrapper>
 
@@ -252,10 +224,14 @@ const Home = () => {
 
       <PlatformPage>
         <StrongText2>Our Platform</StrongText2>
+        <br />
         <SmallText>Register your Intellectual Property on Blockchain</SmallText>
 
         <OurPlatformStyle>
-          <LogoStyle>BLOCKPECKER</LogoStyle>
+          <LogoStyle>
+            BLOCKPIED {"  "} <Icon name="plus" />
+          </LogoStyle>
+
           <img
             alt=""
             width="160px"
@@ -272,36 +248,36 @@ const Home = () => {
           <CardContainer>
             <Card>
               {/* <BulbIcon size="42" /> */}
-              <CardHeader>Patents</CardHeader>
+              <CardHeader>Register Trademarks</CardHeader>
               <CardContent>
-                All your inventions safe and secure, on the cloud. Collaborate
-                with Patent Agents/Attorneys. With blockpecker sit back, relax
-                and manage your Patents at the click of a button.
+                Do you know unregistered trademarks also have rights ? Click on
+                more below to read more about it. Blockpied allows you to
+                register your Trademarks on the go. Safe and secure. Proof of
+                Ownership? Sorted.
               </CardContent>
             </Card>
           </CardContainer>
           <CardContainer>
             <Card>
               {/* <TMIcon size="42" /> */}
-              <CardHeader>Trademarks</CardHeader>
+              <CardHeader>Register Copyrights </CardHeader>
+              <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
-                Form an Individual to a Corporation, building and nurturing
-                Brands is the key to market success. blockpecker allows you to
-                manage your Trademarks on the go. Safe and secure. Compliance?
-                Sorted!
+                Blockpied provides a great system for recording rights that are
+                created in “original works of authorship,” which can be anything
+                from a photograph to a book, to a website, to a doctoral thesis,
+                to a movie story.
               </CardContent>
             </Card>
           </CardContainer>
           <CardContainer>
             <Card>
               {/* <DesignIcon size="42" /> */}
-              <CardHeader>Design</CardHeader>
+              <CardHeader>Licensing</CardHeader>
+              <CardMeta>Coming Soon..</CardMeta>
               <CardContent>
-                While you were working on evolving that new design language for
-                your products. We are hard at work to design a plat form that
-                allows you to identify competent IPR Attorneys who help you
-                secure your IPR over your Designs. No matter the size of your
-                portfolio, blockpecker has you covered.
+                Blockpied helps you license your Intellectual Property online.
+                You can also transfer ownerhsip to a different parties.
               </CardContent>
             </Card>
           </CardContainer>

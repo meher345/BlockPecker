@@ -22,6 +22,7 @@ export default class ViewTM extends Component {
         this.setState({
           tokenDetails: data
         });
+        console.log(data)
         ipfs.get(data[3], (err, files) => {
           if (err) {
             throw err;
@@ -47,9 +48,6 @@ export default class ViewTM extends Component {
                 <Label style={{ marginLeft: "20px" }} tag>
                   {this.state.tokenDetails[2]}
                 </Label>
-              </Header>
-              <Header size="medium" dividing>
-                Trademark Class:{" "}
               </Header>
               <Header size="medium" dividing>
                 Trademark Description: {this.state.tokenDetails[1]}

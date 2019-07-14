@@ -20,7 +20,7 @@ export default class TMClassList extends Component {
     );
   };
   render() {
-    console.log(GoodsAndServices);
+    // console.log(GoodsAndServices);
 
     return (
       <>

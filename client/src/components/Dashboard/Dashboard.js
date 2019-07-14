@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Loader } from "rimble-ui";
 import styled from "styled-components";
-import { Button } from "semantic-ui-react";
-
+// import { Button } from "semantic-ui-react";
+import { ALinkStyle } from "../Home/Home";
+import { Button as ButtonRI } from "rimble-ui";
 //local imports
 import TrademarkArtifact from "../../contracts/Trademark.json";
 import getWeb3 from "../../utils/getWeb3";
@@ -40,9 +41,16 @@ class Dashboard extends Component {
     return (
       <LoaderWrapper>
         <Loader size="80px" />
-
         <h3> Loading Web3, accounts and contract...</h3>
         <p> Unlock your metamask </p>
+        <br />
+        <p>
+          If you dont have metamask installed, please download metamask to
+          access your dashboard
+        </p>
+        <ALinkStyle href="https://metamask.io/" target="_blank">
+          <ButtonRI.Outline>Download Metamask</ButtonRI.Outline>
+        </ALinkStyle>
       </LoaderWrapper>
     );
   }
