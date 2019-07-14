@@ -210,12 +210,11 @@ export default class SearchTrademark extends Component {
                         {eachResult.className}
                       </EachResultItemStyle>
                     </SearchTMClassStyle>
-                    <SearchTMClassStyle>
-                      <GenericHeading>Created On </GenericHeading>
-                      <EachResultItemStyle>
-                        {eachResult.createdAt}
-                      </EachResultItemStyle>
-                    </SearchTMClassStyle>
+
+                    <div>
+                      <label>Created On</label>
+                      <p>{eachResult.createdAt}</p>
+                    </div>
                   </EachResultStyle>
                 ))}
               </SearchResultsStyle>
