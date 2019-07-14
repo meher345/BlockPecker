@@ -11,6 +11,7 @@ import {
   Icon
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import convertTimeStamp from "../../utils/unixTimeConvert";
 
 const MainWrapper = styled.div`
   padding: 20px 15%;
@@ -48,6 +49,7 @@ export default class MyTrademarks extends Component {
     }
   }
 
+
   getFileFromIPFS = async hash => {
     //save document to IPFS,return its hash#, and set hash# to state
     //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
@@ -72,34 +74,32 @@ export default class MyTrademarks extends Component {
               <Card key={index}>
                 <Card.Content>
                   <Card.Header>{value[0]}</Card.Header>
-                  <Card.Meta>{value[2]}</Card.Meta>
-                  <Card.Description>{value[1]}</Card.Description>
-                  <div>
+                  <Card.Description>{value[2]}</Card.Description>
+
+                  
+                </Card.Content>
+
+                <Card.Content extra>
+                  <Card.Meta>{value[4]}</Card.Meta>
+                  <Card.Meta>{convertTimeStamp(value[5].toNumber())}</Card.Meta>
+                  
+                </Card.Content>
+
+                <Card.Content extra>
+                  <div className='ui buttons'>
                     <Link
                       to={`/dashboard/view/${value &&
                         value.tokenId &&
                         value.tokenId}`}
                     >
-                      <Button floated="right" basic color="black">
-                        {" "}
+                      <Button basic color='green'>
                         View Details
-                      </Button>
+                    </Button>
                     </Link>
                   </div>
                 </Card.Content>
 
-                {/* <Card.Content extra>
-                  <Link
-                    to={`/dashboard/view/${value &&
-                      value.tokenId &&
-                      value.tokenId}`}
-                  >
-                    <Button basic color="black">
-                      {" "}
-                      View Details
-                    </Button>
-                  </Link>
-                </Card.Content> */}
+
               </Card>
             ))}
             <Card>

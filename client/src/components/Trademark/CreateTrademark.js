@@ -79,7 +79,7 @@ class CreateTrademark extends Component {
     markResponse: false,
     propertyType: "Trademark",
     markType: "Generic",
-    markClass: "",
+    className: "",
     markName: "",
     markDesc: "",
     myMarks: null,
@@ -90,11 +90,11 @@ class CreateTrademark extends Component {
     validated: false
   };
 
-  createMark = async (markName, markDesc, markType, ipfsHash) => {
+  createMark = async (markName, markDesc, markType, ipfsHash, className) => {
     const { accounts, contract } = this.props;
-
+    console.log(className)
     await contract.methods
-      .createMark(markName, markDesc, markType, ipfsHash)
+      .createMark(markName, markDesc, markType, ipfsHash, className)
       .send({ from: accounts[0] });
     this.setState({ markResponse: true });
   };
@@ -129,32 +129,37 @@ class CreateTrademark extends Component {
     //save document to IPFS,return its hash#, and set hash# to state
     //https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/FILES.md#add
     await ipfs.add(this.state.buffer, (err, ipfsHash) => {
-      console.log(err, ipfsHash);
+      // console.log(err, ipfsHash);
       //setState by setting ipfsHash to ipfsHash[0].hash
       this.setState({ ipfsHash: ipfsHash[0].hash });
     }); //await ipfs.add
   }; //onSubmit
 
   handleSubmit = async () => {
-    await ipfs.add(this.state.buffer, (err, ipfsHash) => {
-      if (err) {
-        throw err;
-      }
-      if (ipfsHash) {
-        this.createMark(
-          this.state.markName,
-          this.state.markDesc,
-          this.state.markType,
-          ipfsHash[0].hash
-        )
-          .then(() => window.history.pushState("/"))
-          .then(this.setState({ markResponse: true }));
-      }
-    });
-    this.props.history.push("/dashboard");
+    if (!this.state.file) {
+      throw alert("please upload a document")
+    } else {
+      await ipfs.add(this.state.buffer, async (err, ipfsHash) => {
+        if (err) {
+          throw err;
+        }
+        if (ipfsHash) {
+
+         await this.createMark(
+            this.state.markName,
+            this.state.markDesc,
+            this.state.markType,
+            ipfsHash[0].hash,
+            this.state.className
+          )
+        }
+      });
+      this.props.history.push("/dashboard");
+    }
   };
 
   render() {
+    console.log(this.state.className, this.state.markType)
     return (
       <MainWrapper>
         <Form.Field label="Type: ">
@@ -231,7 +236,7 @@ class CreateTrademark extends Component {
                       "Class 44",
                       "Class 45"
                     ]}
-                    onChange={e => this.setState({ markClass: e.target.value })}
+                    onChange={e => this.setState({ className: e.target.value })}
                   />
                 </Form.Field>
                 <a href="/resources/trademark-class-list" target="_blank">
@@ -254,56 +259,30 @@ class CreateTrademark extends Component {
                 />
               </Form.Field>
               <FieldLabel>Upload document to prove prior use: </FieldLabel>
-              <Dropzone onDrop={this.onDrop}>
-                {({ getRootProps, getInputProps }) => (
-                  <section>
+              <Form.Field label="Upload document to prove prior use: ">
+                <Dropzone onDrop={this.onDrop}>
+                  {({ getRootProps, getInputProps }) => (
                     <DropZoneStyle {...getRootProps()}>
                       <Icon color="primary" name="CloudUpload" />
-                      <input required {...getInputProps()} />
+                      <input {...getInputProps()} />
                       {!this.state.file ? (
                         <p>Drag 'n' drop file here, or click to select</p>
                       ) : (
-                        <p>{this.state.file && this.state.file.name}</p>
-                      )}
+                          <p>{this.state.file && this.state.file.name}</p>
+                        )}
                     </DropZoneStyle>
-                  </section>
-                )}
-              </Dropzone>
-
-              {/* <button onClick={e => this.uploadToIPFS(e)}>Test ipfs</button>
-            <button onClick={() => this.getFileFromIPFS(this.state.ipfsHash)}>
-              get ipfs
-            </button> */}
-
-              {/* {this.state.ipfsImg ? (
-              <img
-                src={"data:image/png;base64," + this.state.ipfsImg}
-                height="200px"
-                width="200px"
-              />
-            ) : (
-              <p>Not Found</p>
-            )} */}
-
+                  )}
+                </Dropzone>
+              </Form.Field>
               <Button type="submit">Register</Button>
             </FormStyle>
-            {/* <Button onClick={() => console.log(this.state)}>Log State</Button> */}
-
-            {/* {this.state.markResponse && (
-              <Flash my={3} variant="success">
-                Created successfully...
-              </Flash>
-            )}
-
-            <ToastMessage.Provider
-              ref={node => (window.toastProvider = node)}
-            /> */}
           </>
         ) : (
-          <>
-            <h3>Register Copyright</h3>
-          </>
-        )}
+            <>
+              <h3>Register Copyright</h3>
+              <p>Coming soon...!</p>
+            </>
+          )}
       </MainWrapper>
     );
   }
