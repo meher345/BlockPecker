@@ -1,7 +1,7 @@
 {
   "name": "typescript-graphql",
   "scripts": {
-    "start": "node dist/src/index.js",
+    "start": "node dist/index.js",
     "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./src",
     "build": "rimraf dist && tsc",
     "heroku-prebuild": "npm install --production=false"
