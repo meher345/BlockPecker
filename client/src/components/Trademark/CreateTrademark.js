@@ -23,23 +23,14 @@ const DropZoneStyle = styled.div`
   display: inline-flex;
   font-weight: 600;
   height: 3rem;
-  justify-content: space-between;
+  justify-content: flex-start;
   line-height: 1.15;
   margin-bottom: 10px;
-  min-width: 3rem;
   overflow: hidden;
   padding: 0 32px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  transition-delay: 0s;
   transition-duration: 0.15s;
   transition-property: all;
   transition-timing-function: ease;
-  user-select: none;
-  white-space: nowrap;
-  z-index: 0;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px;
@@ -172,6 +163,7 @@ class CreateTrademark extends Component {
                   <FormStyle>
                     <Field label="Trademark Type: ">
                       <Select
+                        required
                         items={[
                           "Generic",
                           "Descriptive",
@@ -186,6 +178,7 @@ class CreateTrademark extends Component {
                     <LineAlignmentStyle>
                       <Field label="Trademark Class: ">
                         <Select
+                          required
                           items={[
                             "Class 1",
                             "Class 2",
@@ -244,6 +237,7 @@ class CreateTrademark extends Component {
                     </LineAlignmentStyle>
                     <Field label="Trademark Name: ">
                       <Form.Input
+                        required
                         width={520}
                         onChange={e =>
                           this.setState({ markName: e.target.value })
@@ -252,6 +246,7 @@ class CreateTrademark extends Component {
                     </Field>
                     <Field label="Trademark Description: ">
                       <Textarea
+                        required
                         width={520}
                         rows={3}
                         onChange={e =>
@@ -259,21 +254,23 @@ class CreateTrademark extends Component {
                         }
                       />
                     </Field>
-                    <Field label="Upload document to prove prior use: ">
-                      <Dropzone onDrop={this.onDrop}>
-                        {({ getRootProps, getInputProps }) => (
-                          <DropZoneStyle {...getRootProps()}>
-                            <Icon color="primary" name="CloudUpload" />
-                            <input {...getInputProps()} />
-                            {!this.state.file ? (
-                              <p>Drag 'n' drop file here, or click to select</p>
-                            ) : (
-                              <p>{this.state.file && this.state.file.name}</p>
-                            )}
-                          </DropZoneStyle>
-                        )}
-                      </Dropzone>
-                    </Field>
+                    <FieldLabel>
+                      Upload document to prove prior use:{" "}
+                    </FieldLabel>
+                    <Dropzone onDrop={this.onDrop}>
+                      {({ getRootProps, getInputProps }) => (
+                        <DropZoneStyle {...getRootProps()}>
+                          <Icon color="primary" name="CloudUpload" />
+                          <input {...getInputProps()} />
+                          {!this.state.file ? (
+                            <p>Drag 'n' drop file here, or click to select</p>
+                          ) : (
+                            <p>{this.state.file && this.state.file.name}</p>
+                          )}
+                        </DropZoneStyle>
+                      )}
+                    </Dropzone>
+
                     <Button
                       disabled={
                         loading ||
